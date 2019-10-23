@@ -1,34 +1,45 @@
 const passport = require('passport')
-const Auth0Strategy = require('passport-auth0')
+const LocalStrategy = require('passport-local').Strategy
 const db = require('../controllers/dbController')
 
-var strategy = new Auth0Strategy(
-    {
-        domain: 'auction.eu.auth0.com',
-        clientID: 'i2agDAaSmI8TlJbYuaDcQOzMsCMfqK6g',
-        clientSecret: 'oaC_6rIoLKOnlHFkCYSsrx_TtEqxBhD8WRIe00R1l8nf7ahnFrqgOzjoCWbta-ST',
-        callbackURL:
-            process.env.AUTH0_CALLBACK_URL || '/callback'
-    },
-    async function (accessToken, refreshToken, extraParams, profile, done) {
-      // accessToken is the token to call Auth0 API (not needed in the most cases)
-      // extraParams.id_token has the JSON Web Token
-      if(!await db.isUser(profile.id)){
-        await db.createUser({Token: profile.id})
-      }
-      return done(null, profile)
+passport.use(
+  new LocalStrategy(async function (username, password, done){
+    try{
+        const user = await db.findUserByName(username)
+        if(!user || user.Password){
+          return done(null, false, {
+            errors: {'login or password': 'is invalid'}
+          })
+        }else{
+          console.log('True')
+          return done(null, user)
+        }
+    }catch(err){
+      return done(err);
     }
+  })
 )
 
 
-passport.use(strategy)
-
-passport.serializeUser(function (user, done) {
-  done(null, user)
+passport.serializeUser(function (user, done){
+  console.log('Serializing', user)
+  done(null, user._id)
 })
 
-passport.deserializeUser(function (user, done) {
-  done(null, user)
+passport.deserializeUser(async function (id, done){
+  console.log('Deserializing', id)
+  try{
+    const User = await db.findUserById(id)
+    if(!User) {
+      return done(null, false)
+    }
+    else{
+      return done(null, User)
+    }
+  }
+  catch(err){
+    return done(err)
+  }
 })
 
 module.exports = passport

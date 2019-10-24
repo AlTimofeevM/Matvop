@@ -23,10 +23,10 @@ module.exports.login = function(req,res,next){
     })(req,res, next)
 }
 
-module.exports.addUser = async function (req, res){
+module.exports.register = async function (req, res){
     try{
         console.log(req.body)
-        await db.addUser(req.body)
+        await db.addUser({Name : req.body.login, Login: req.body.login, Password: req.body.password})
         res.sendStatus(200)
     }catch(err){
         console.log(err)

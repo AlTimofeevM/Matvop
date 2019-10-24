@@ -8,3 +8,7 @@ const userSchema = mongoose.Schema({
     Questions:[String],
     Answers:[String]
 })
+
+const User = connection.model('User', userSchema)
+
+module.exports = User

@@ -19,7 +19,7 @@ app.use(function(req,res,next){
 })
 
 app.use(express.json())
-app.use(express.urlencoded({extended : false}))
+app.use(express.urlencoded({ extended: false }))
 app.use(express.static(path.join(frontendPath, '/public')))
 
 app.use(

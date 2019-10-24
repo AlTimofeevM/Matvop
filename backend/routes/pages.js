@@ -20,5 +20,9 @@ router.get('/login', (req,res)=>{
     res.sendFile(path.join(frontendPath,'/login.html'))
 })
 
+router.get('/register', (req,res)=>{
+    res.sendFile(path.join(frontendPath,'/register.html'))
+})
+
 
 module.exports = router

@@ -4,21 +4,18 @@ const db = require('./dbController')
 
 
 module.exports.login = function(req,res,next){
-    passport.authenticate('local', function (err, user) {
-        console.log(user)
-        if(err){
+    passport.authenticate('local', function(err, user) {
+        if (err) {
+          return next(err)
+        }
+        if (!user) {
+          return res.send('Укажите правильный логин или пароль!')
+        }
+        req.logIn(user, function(err) {
+          if (err) {
             return next(err)
-        }
-        if(!user){
-            return res.redirect('/')
-        }
-        req.logIn(user, function(err){
-            if(err){
-                return next(err)
-            }
-            
-            console.log(user)
-            res.redirect('/home')
+          }
+          return res.redirect('/')
         })
     })(req,res, next)
 }
@@ -26,7 +23,7 @@ module.exports.login = function(req,res,next){
 module.exports.register = async function (req, res){
     try{
         console.log(req.body)
-        await db.addUser({Name : req.body.login, Login: req.body.login, Password: req.body.password})
+        await db.addUser({name : req.body.login, login: req.body.login, password: req.body.password})
         res.sendStatus(200)
     }catch(err){
         console.log(err)

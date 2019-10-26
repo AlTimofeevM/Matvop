@@ -1,45 +1,32 @@
-const passport = require('passport')
-const LocalStrategy = require('passport-local').Strategy
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
 const db = require('../controllers/dbController')
 
-passport.use(
-  new LocalStrategy(async function (username, password, done){
-    try{
-        const user = await db.findUserByName(username)
-        if(!user || user.Password){
-          return done(null, false, {
-            errors: {'login or password': 'is invalid'}
-          })
-        }else{
-          console.log('True')
-          return done(null, user)
-        }
-    }catch(err){
-      return done(err);
-    }
-  })
-)
 
-
-passport.serializeUser(function (user, done){
-  console.log('Serializing', user)
+passport.serializeUser(function(user, done) {
+  console.log('Сериализация: ', user)
   done(null, user._id)
 })
 
-passport.deserializeUser(async function (id, done){
-  console.log('Deserializing', id)
+passport.deserializeUser(async function(id, done) {
   try{
-    const User = await db.findUserById(id)
-    if(!User) {
+    const user = await db.findUserById(id)
+    if(!user) {
       return done(null, false)
     }
     else{
-      return done(null, User)
+      return done(null, user)
     }
   }
   catch(err){
     return done(err)
   }
-})
+});
+
+passport.use(
+  new LocalStrategy({ usernameField: 'login' }, async function(login,password,done) {
+    return await db.userLogin(login, password, done)
+  })
+)
 
 module.exports = passport

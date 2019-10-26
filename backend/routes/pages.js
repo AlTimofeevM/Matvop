@@ -3,7 +3,6 @@ const router = express.Router()
 const path = require('path')
 const frontendPath = path.join(__dirname, '../../frontend')
 
-
 router.get('/', (req,res)=> {
     if(req.isAuthenticated()){
         res.send("Authenticated")
@@ -24,5 +23,9 @@ router.get('/register', (req,res)=>{
     res.sendFile(path.join(frontendPath,'/register.html'))
 })
 
+router.get('/logout', (req, res) => {
+    req.logOut();
+    res.redirect('/');
+});
 
 module.exports = router

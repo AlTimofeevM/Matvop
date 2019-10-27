@@ -4,15 +4,20 @@ const path = require('path')
 const frontendPath = path.join(__dirname, '../../frontend')
 
 router.get('/', (req,res)=> {
-    if(req.isAuthenticated()){
-        res.send("Authenticated")
-    }else{
-        res.send("Not Authenticated")
-    }
+    res.redirect('/home');
 })
 
 router.get('/home', (req, res) => {
-    res.sendFile(path.join(frontendPath,'/index.html'))
+    if(req.isAuthenticated()){
+        res.sendFile(path.join(frontendPath,'/indexAuth.html'))
+    }else{
+        res.sendFile(path.join(frontendPath,'/index.html'))
+    }
+
+})
+
+router.get('/ask', (req,res) => {
+    res.sendFile(path.join(frontendPath, '/question.html'))
 })
 
 router.get('/login', (req,res)=>{
@@ -25,7 +30,7 @@ router.get('/register', (req,res)=>{
 
 router.get('/logout', (req, res) => {
     req.logOut();
-    res.redirect('/');
+    res.redirect('/home');
 });
 
 module.exports = router

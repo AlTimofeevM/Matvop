@@ -15,7 +15,7 @@ module.exports.login = function(req,res,next){
           if (err) {
             return next(err)
           }
-          return res.redirect('/')
+          return res.redirect('/home')
         })
     })(req,res, next)
 }
@@ -29,4 +29,8 @@ module.exports.register = async function (req, res){
         console.log(err)
         res.status(500).send(err)
     }
+}
+
+module.exports.ask = function (req,res){
+  res.send(req.body)
 }

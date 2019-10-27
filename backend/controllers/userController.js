@@ -31,6 +31,9 @@ module.exports.register = async function (req, res){
     }
 }
 
-module.exports.ask = function (req,res){
-  res.send(req.body)
+module.exports.ask = async function (req,res){
+  let questionData = {userLogin: req.user._id, title: req.body.title, description: req.body.description, tags: req.body.tags.split(",")}
+  let question = await db.addQuestion(questionData);
+  await db.addQuestionToUser(req.user._id, question._id)
+  res.redirect('/home')
 }

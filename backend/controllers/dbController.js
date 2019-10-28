@@ -23,6 +23,9 @@ exports.addUser = function (userData) {
   return UserModel.create(userData)
 }
 
+exports.findQuestionById = function (id){
+    return QuestionModel.findById(id)
+}
 exports.addQuestion = function (questionData) {
   return QuestionModel.create(questionData)
 }

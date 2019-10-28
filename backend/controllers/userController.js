@@ -37,3 +37,13 @@ module.exports.ask = async function (req,res){
   await db.addQuestionToUser(req.user._id, question._id)
   res.redirect('/home')
 }
+
+module.exports.showQuestions = async function (req,res){
+  let Quests = []
+  let Q = req.user.questions
+  for(let id of Q){
+    let quest = await db.findQuestionById(id)
+    Quests.push(quest)
+  }
+  res.status(200).send({Quests : Quests})
+} 

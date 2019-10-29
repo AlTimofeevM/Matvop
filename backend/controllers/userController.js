@@ -47,3 +47,14 @@ module.exports.showQuestions = async function (req,res){
   }
   res.status(200).send({Quests : Quests})
 } 
+
+module.exports.allAnswers = async function(req,res) {
+  let id = req.url.slice(6)
+  let question = await db.findQuestionById(id)
+  let Ans = []
+  for(let id of question.ans){
+      let ans = await db.findAnswerById(id)
+      Ans.push(ans.answer)
+  }
+  res.status(200).send({Question : question, Ans : Ans})
+}

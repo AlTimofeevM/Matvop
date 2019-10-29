@@ -28,6 +28,10 @@ router.get('/register', (req,res)=>{
     res.sendFile(path.join(frontendPath,'/register.html'))
 })
 
+router.get('/question/*', (req,res)=>{
+    res.sendFile(path.join(frontendPath,'/answer.html'))
+})
+
 router.get('/logout', (req, res) => {
     req.logOut();
     res.redirect('/home');

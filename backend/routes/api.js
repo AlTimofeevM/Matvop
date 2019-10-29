@@ -7,5 +7,6 @@ router.post('/register', userController.register)
 router.post('/ask', userController.ask)
 
 router.get('/qwerty', userController.showQuestions)
+router.get('/question=*', userController.allAnswers)
 
 module.exports = router

@@ -1,10 +1,10 @@
 const UserModel = require('../models/user')
 const QuestionModel = require('../models/question')
+const AnswerModel = require('../models/answer')
 
 exports.findUserById = function (id) {
     return UserModel.findById(id)
 }
-
 
 exports.userLogin =  function(login, password, done) {
     UserModel.findOne({ login : login }, function(err, user) {
@@ -32,4 +32,9 @@ exports.addQuestion = function (questionData) {
 
 exports.addQuestionToUser = function(userId, questionId){
   return UserModel.findOneAndUpdate({_id:userId}, {$push : {questions: questionId}})
+}
+
+
+exports.findAnswerById = function (id){
+  return AnswerModel.findById(id)
 }

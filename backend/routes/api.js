@@ -5,6 +5,7 @@ const userController = require('../controllers/userController')
 router.post('/login', userController.login)
 router.post('/register', userController.register)
 router.post('/ask', userController.ask)
+router.post('/answer=*', userController.answer)
 
 router.get('/qwerty', userController.showQuestions)
 router.get('/question=*', userController.allAnswers)

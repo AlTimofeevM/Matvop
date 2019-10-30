@@ -33,7 +33,7 @@ module.exports.register = async function (req, res){
 
 module.exports.ask = async function (req,res){
   let questionData = {userLogin: req.user._id, title: req.body.title, description: req.body.description, tags: req.body.tags.split(",")}
-  let question = await db.addQuestion(questionData);
+  let question = await db.addQuestion(questionData)
   await db.addQuestionToUser(req.user._id, question._id)
   res.redirect('/home')
 }
@@ -49,7 +49,7 @@ module.exports.showQuestions = async function (req,res){
 } 
 
 module.exports.allAnswers = async function(req,res) {
-  let id = req.url.slice(6)
+  let id = req.url.slice(10)
   let question = await db.findQuestionById(id)
   let Ans = []
   for(let id of question.ans){
@@ -57,4 +57,12 @@ module.exports.allAnswers = async function(req,res) {
       Ans.push(ans.answer)
   }
   res.status(200).send({Question : question, Ans : Ans})
+}
+
+module.exports.answer = async function (req,res){
+  let id = req.url.slice(8)
+  let answerData = {answer : req.body.description, question: id}
+  let answer = await db.addAnswer(answerData)
+  
+  res.redirect('/question/' + id)
 }

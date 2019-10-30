@@ -26,6 +26,7 @@ exports.addUser = function (userData) {
 exports.findQuestionById = function (id){
     return QuestionModel.findById(id)
 }
+
 exports.addQuestion = function (questionData) {
   return QuestionModel.create(questionData)
 }
@@ -34,6 +35,10 @@ exports.addQuestionToUser = function(userId, questionId){
   return UserModel.findOneAndUpdate({_id:userId}, {$push : {questions: questionId}})
 }
 
+
+exports.addAnswer = function (answerData) {
+  return AnswerModel.create(answerData)
+}
 
 exports.findAnswerById = function (id){
   return AnswerModel.findById(id)

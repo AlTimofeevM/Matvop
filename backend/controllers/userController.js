@@ -39,12 +39,7 @@ module.exports.ask = async function (req,res){
 }
 
 module.exports.showQuestions = async function (req,res){
-  let Quests = []
-  let Q = req.user.questions
-  for(let id of Q){
-    let quest = await db.findQuestionById(id)
-    Quests.push(quest)
-  }
+  let Quests = await db.allQuestions()
   res.status(200).send({Quests : Quests})
 } 
 

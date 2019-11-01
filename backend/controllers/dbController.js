@@ -27,6 +27,10 @@ exports.findQuestionById = function (id){
     return QuestionModel.findById(id)
 }
 
+exports.allQuestions = function(){
+  return QuestionModel.find({})
+}
+
 exports.addQuestion = function (questionData) {
   return QuestionModel.create(questionData)
 }

@@ -54,7 +54,7 @@ module.exports.allAnswers = async function(req,res) {
   let Ans = []
   for(let id of question.answers){
       let ans = await db.findAnswerById(id)
-      Ans.push({answer : ans.answer, score: ans.score})
+      Ans.push({answer : ans.answer, score: ans.score, id: ans._id})
   }
   res.status(200).send({Question : question, Ans : Ans})
 }
@@ -65,4 +65,16 @@ module.exports.answer = async function (req,res){
   let answer = await db.addAnswer(answerData)
   await db.addAnswerToQuestion(id,answer._id)
   res.redirect('/question/' + id)
+}
+
+module.exports.upscore = async function(req,res){
+  let id = req.url.slice(9)
+  await db.incAnsScore(id)
+  res.redirect('back')
+}
+
+module.exports.downscore = async function(req,res){
+  let id = req.url.slice(11)
+  await db.decAnsScore(id)
+  res.redirect('back')
 }

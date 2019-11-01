@@ -47,3 +47,11 @@ exports.addAnswerToQuestion = function(questionId, answerId){
 exports.findAnswerById = function (id){
   return AnswerModel.findById(id)
 }
+
+exports.incAnsScore = function(id){
+  return AnswerModel.findOneAndUpdate({ _id: id}, { $inc: { score : 1 } })
+}
+
+exports.decAnsScore = function(id){
+  return AnswerModel.findOneAndUpdate({ _id: id}, { $inc: { score : -1 } })
+}

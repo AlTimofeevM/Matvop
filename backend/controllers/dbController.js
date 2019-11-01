@@ -40,6 +40,10 @@ exports.addAnswer = function (answerData) {
   return AnswerModel.create(answerData)
 }
 
+exports.addAnswerToQuestion = function(questionId, answerId){
+  return QuestionModel.findOneAndUpdate({_id:questionId}, {$push : {answers: answerId}})
+}
+
 exports.findAnswerById = function (id){
   return AnswerModel.findById(id)
 }

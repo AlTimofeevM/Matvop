@@ -6,7 +6,7 @@ const questionSchema = mongoose.Schema({
     title: String,
     description: String,
     tags: [String],
-    ans: [String]
+    answers: [String]
 })
 
 const Question = connection.model('Question', questionSchema)

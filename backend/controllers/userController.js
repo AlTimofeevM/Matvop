@@ -52,17 +52,17 @@ module.exports.allAnswers = async function(req,res) {
   let id = req.url.slice(10)
   let question = await db.findQuestionById(id)
   let Ans = []
-  for(let id of question.ans){
+  for(let id of question.answers){
       let ans = await db.findAnswerById(id)
-      Ans.push(ans.answer)
+      Ans.push({answer : ans.answer, score: ans.score})
   }
   res.status(200).send({Question : question, Ans : Ans})
 }
 
 module.exports.answer = async function (req,res){
   let id = req.url.slice(8)
-  let answerData = {answer : req.body.description, question: id}
+  let answerData = {answer : req.body.description, question: id, score: 0}
   let answer = await db.addAnswer(answerData)
-  
+  await db.addAnswerToQuestion(id,answer._id)
   res.redirect('/question/' + id)
 }

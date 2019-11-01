@@ -4,6 +4,7 @@ const connection = require('../config/db');
 const answerSchema = mongoose.Schema({
     userLogin: String,
     answer: String,
+    score: Number,
     question: String
 })
 

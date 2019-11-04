@@ -1,2 +1,7 @@
 \.idea/
 \.vscode/
+node_modules/
+sessions/
+*.log
+*.lock
+package-lock.json

@@ -2,34 +2,35 @@ const express = require('express')
 const router = express.Router()
 const path = require('path')
 const frontendPath = path.join(__dirname, '../../frontend')
+const userController = require('../controllers/userController')
+
 
 router.get('/', (req,res)=> {
     res.redirect('/home');
 })
 
-router.get('/home', (req, res) => {
+router.get('/home',async function(req, res){
     if(req.isAuthenticated()){
-        res.sendFile(path.join(frontendPath,'/indexAuth.html'))
+        res.render('indexAuth', {Quests : await userController.showQuestions()})
     }else{
-        res.sendFile(path.join(frontendPath,'/index.html'))
+        res.render('index', {Quests : await userController.showQuestions()})
     }
-
 })
 
 router.get('/ask', (req,res) => {
-    res.sendFile(path.join(frontendPath, '/question.html'))
+    res.render('question')
 })
 
 router.get('/login', (req,res)=>{
-    res.sendFile(path.join(frontendPath,'/login.html'))
+    res.render('login')
 })
 
 router.get('/register', (req,res)=>{
-    res.sendFile(path.join(frontendPath,'/register.html'))
+    res.render('register')
 })
 
-router.get('/question/*', (req,res)=>{
-    res.sendFile(path.join(frontendPath,'/answer.html'))
+router.get('/question/*', async (req,res)=>{
+    res.render('answer', {data : await userController.allAnswers(req.url)})
 })
 
 router.get('/logout', (req, res) => {

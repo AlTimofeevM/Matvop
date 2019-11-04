@@ -8,6 +8,9 @@ const frontendPath = path.join(__dirname, '../frontend', '')
 const app = express();
 const port = 8080;
 
+
+app.set("view engine", "ejs")
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(frontendPath, '/public')))

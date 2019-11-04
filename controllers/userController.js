@@ -24,7 +24,7 @@ module.exports.register = async function (req, res){
     try{
         console.log(req.body)
         await db.addUser({name : req.body.login, login: req.body.login, password: req.body.password})
-        res.sendStatus(200)
+        res.sendStatus(200).redirect('/home')
     }catch(err){
         console.log(err)
         res.status(500).send(err)
@@ -38,20 +38,20 @@ module.exports.ask = async function (req,res){
   res.redirect('/home')
 }
 
-module.exports.showQuestions = async function (req,res){
+module.exports.showQuestions = async function (){
   let Quests = await db.allQuestions()
-  res.status(200).send({Quests : Quests})
+  return Quests
 } 
 
-module.exports.allAnswers = async function(req,res) {
-  let id = req.url.slice(10)
+module.exports.allAnswers = async function(url) {
+  let id = url.slice(10,34)
   let question = await db.findQuestionById(id)
   let Ans = []
   for(let id of question.answers){
       let ans = await db.findAnswerById(id)
       Ans.push({answer : ans.answer, score: ans.score, id: ans._id})
   }
-  res.status(200).send({Question : question, Ans : Ans})
+  return {Question : question, Ans : Ans}
 }
 
 module.exports.answer = async function (req,res){

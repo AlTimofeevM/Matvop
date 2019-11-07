@@ -56,6 +56,16 @@ exports.incAnsScore = function(id){
   return AnswerModel.findOneAndUpdate({ _id: id}, { $inc: { score : 1 } })
 }
 
-exports.decAnsScore = function(id){
+exports.decAnsScore = function(id) {
   return AnswerModel.findOneAndUpdate({ _id: id}, { $inc: { score : -1 } })
+}
+
+exports.isUserScored = function(id) {
+  UserModel.findById(id , function(err, user) {
+    if (err) { return false; }
+    if (!user) {
+      return false;
+    }
+    return true;
+  });
 }

@@ -3,21 +3,22 @@ const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 const passport = require('passport');
 const path = require('path')
-const frontendPath = path.join(__dirname, '../frontend', '')
+const publicPath = path.join(__dirname, '/public')
 
 const app = express();
 const port = 8080;
+
 
 
 app.set("view engine", "ejs")
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(frontendPath, '/public')))
+app.use(express.static(publicPath))
 
 app.use(
   session({
-    secret: 'hghtyNN23h',
+    secret: 'hghtyNN23hbd54dstkhj2342asdfa3689jhf',
     store: new FileStore(),
     cookie: {
       path: '/',

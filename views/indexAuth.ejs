@@ -25,9 +25,8 @@
                 </form>
             </li>
             <li>
-
+                <a href="/ask">Задать вопроc</a>
             </li>
-            
             <li>
                 <a href="/logout">Выйти</a>
             </li>
@@ -35,11 +34,7 @@
       </div>
     </nav>
     <div class="container  my-5 my-lg-2 ml-6 mr-6">
-        <div class="container text-right">
-            <form method="get" action="/ask" class='ml-4'>
-              <button type="submit" class="btn btn-secondary mr-6">Задать вопрос</button>
-            </form>
-          </div>
+      <br/>
         <div class="container" id = "questions">
             <% for(var i=0; i<Quests.length;i++) {%>
                 <div class="question">

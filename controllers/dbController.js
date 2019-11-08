@@ -3,7 +3,11 @@ const QuestionModel = require('../models/question')
 const AnswerModel = require('../models/answer')
 
 exports.findUserById = function (id) {
-    return UserModel.findById(id)
+  return UserModel.findById(id)
+}
+
+exports.findUserByLogin = function (login) {
+  return UserModel.findOne({login: login})
 }
 
 exports.userLogin =  function(login, password, done) {

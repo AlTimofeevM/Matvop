@@ -9,14 +9,12 @@ const localStrategy = new LocalStrategy({ usernameField: 'login' }, async functi
 })
 
 const vkStrategy = new VKontakteStrategy({
-  clientID:    7202672,
+  clientID:     7202672,
   clientSecret: "a8Bf5ICXHu9TKU9cSbNK",
-  callbackURL:  "http://localhost/auth/vkontakte/callback"
+  callbackURL:  "https://matvop.herokuapp.com/auth/vkontakte/callback"
 },
 function(accessToken, refreshToken, params, profile, done) {
-  User.findOrCreate({ token: profile.id }, function (err, user) {
-    return done(err, user);
-  });
+  return db.vkAuth(accessToken, refreshToken, params, profile, done)
 }
 )
 

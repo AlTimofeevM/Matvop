@@ -21,10 +21,6 @@ router.get('/ask', (req,res) => {
     res.render('question')
 })
 
-router.get('/login', (req,res)=>{
-    res.render('login')
-})
-
 router.get('/auth/vkontakte',
   passport.authenticate('vkontakte'),
   function(req, res){
@@ -35,10 +31,6 @@ router.get('/auth/vkontakte',
   function(req, res) {
     res.redirect('/');
   });
-
-router.get('/register', (req,res)=>{
-    res.render('register')
-})
 
 router.get('/question/*', async (req,res)=>{
     res.render('answer', {data : await userController.allAnswers(req.url)})

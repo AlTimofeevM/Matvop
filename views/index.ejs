@@ -36,11 +36,11 @@
     </nav>
 
     <div id="modal1" class="modal">
-        <form class="modal-content animate" action="/login" method="POST">
+      <div class="modal-content animate">
+        <form action="/login" method="POST">
           <div class="imgcontainer">
             <span onclick="document.getElementById('modal1').style.display='none'" class="close" title="Close Modal">×</span>
-          </div>
-      
+          </div>    
           <div class="container">
             <label for="uname"><b>Логин</b></label>
             <input type="text" placeholder="Enter Username" name="login" required>
@@ -50,11 +50,22 @@
               
             <button type="submit">Войти</button>
           </div>
-        </form>
+          </form>
+          <div class="or">
+            <span>или</span>
+          </div>
+          <div class="auth">
+            <a href="/facebook" class="facebook-auth"></a>
+            <a href="/vk" class="vk-auth"></a>
+            <a href="/twitter" class="twitter-auth"></a>
+            <a href="/google" class="google-auth"></a>
+          </div>
+      </div>
     </div>
-
-    <div id="modal2" class="modal">
-        <form class="modal-content animate" action="/register" method="POST">
+    
+    <div id="modal2" class="modal" >
+      <div class="modal-content animate">
+        <form  action="/register" method="POST">
           <div class="imgcontainer">
             <span onclick="document.getElementById('modal2').style.display='none'" class="close" title="Close Modal">×</span>
           </div>
@@ -69,6 +80,17 @@
             <button type="submit">Зарегистрироваться</button>
           </div>
         </form>
+        <div class="or">
+            <span>или</span>
+          </div>
+          <div class="auth">
+            <a href="/facebook" class="facebook-auth"></a>
+            <a href="/vk" class="vk-auth"></a>
+            <a href="/twitter" class="twitter-auth"></a>
+            <a href="/google" class="google-auth"></a>
+          </div>
+      </div>
+      </div>
     </div>
 
       <div class="container">

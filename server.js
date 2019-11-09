@@ -18,7 +18,7 @@ app.use(express.static(publicPath))
 
 app.use(
   session({
-    secret: 'Секретное слово',
+    secret: 'hghtyNN23hbd54dstkhj2342asdfa3689jhf',
     store: new FileStore(),
     cookie: {
       path: '/',

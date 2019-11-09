@@ -115,3 +115,72 @@ span.psw {
        width: 100%;
     }
 }
+
+
+.or:after, .or:before {
+    content: " ";
+    display: inline-block;
+    border-top: 1px solid #517299;
+    width: 45%;
+    vertical-align: middle;
+    margin-top: 2px;
+    margin-left: 6px;
+}
+
+
+.auth {
+    display: flex;
+    flex-direction: row;
+    padding-left: 180px;
+  }
+
+.auth a{
+    text-decoration: none;
+}
+  
+.auth .vk-auth::before{
+    content: "\f189";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    color: grey;
+    font-size: 25px;
+    padding-right: 0.5em;
+}
+
+.auth .facebook-auth::before{
+    padding: 15px;
+    content: "\f09a";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    color: grey;
+    font-size: 25px;
+    padding-right: 0.8em;
+}
+
+.auth .google-auth::before{
+    padding: 15px;
+    content: "\f1a0";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    color: grey;
+    font-size: 25px;
+    padding-right: 0.5em;
+}
+
+.auth .twitter-auth::before{
+    padding: 15px;
+    content: "\f099";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    color: grey;
+    font-size: 25px;
+    padding-right: 0.5em;
+}

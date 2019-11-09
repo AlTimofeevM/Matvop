@@ -27,7 +27,7 @@ router.get('/auth/vkontakte',
   });
 
   router.get('/auth/vkontakte/callback',
-  passport.authenticate('vkontakte', { failureRedirect: '/login' }),
+  passport.authenticate('vkontakte', { failureRedirect: '/' }),
   function(req, res) {
     res.redirect('/');
   });

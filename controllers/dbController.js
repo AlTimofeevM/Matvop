@@ -38,6 +38,17 @@ exports.vkAuth = function(accessToken, refreshToken, params, profile, done) {
   })
 }
 
+exports.odnoklassnikiAuth = function(accessToken, refreshToken, profile, done) {
+  console.log(profile)
+  UserModel.findOne({ token: profile.id }, function(err, user) {
+    if (err) { return done(err); }
+    if (!user) {
+      let user = UserModel.create({token: profile.id})
+    }
+    return done(null, user);
+  })
+}
+
 exports.addUser = function (userData) {
   return UserModel.create(userData)
 }

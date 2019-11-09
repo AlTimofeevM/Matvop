@@ -1,6 +1,7 @@
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
-const VKontakteStrategy = require('passport-vkontakte').Strategy;
+const passport = require('passport')
+const LocalStrategy = require('passport-local').Strategy
+const VKontakteStrategy = require('passport-vkontakte').Strategy
+const OdnoklassnikiStrategy = require('passport-odnoklassniki').Strategy
 const db = require('../controllers/dbController')
 
 
@@ -15,6 +16,16 @@ const vkStrategy = new VKontakteStrategy({
 },
 function(accessToken, refreshToken, params, profile, done) {
   return db.vkAuth(accessToken, refreshToken, params, profile, done)
+})
+
+const odnoklassnikiStrategy = new OdnoklassnikiStrategy({
+  clientID: 512000129587,
+  clientPublic: "CEDLPGJGDIHBABABA",
+  clientSecret: "DBBACFFAE8684518AFE4D923",
+  callbackURL: "https://matvop.herokuapp.com/auth/odnoklassniki/callback"
+},
+function(accessToken, refreshToken, profile, done) {
+  return db.odnoklassnikiAuth(accessToken, refreshToken, profile, done)
 }
 )
 
@@ -40,5 +51,6 @@ passport.deserializeUser(async function(token, done) {
 
 passport.use(localStrategy)
 passport.use(vkStrategy)
+passport.use(odnoklassnikiStrategy)
 
 module.exports = passport

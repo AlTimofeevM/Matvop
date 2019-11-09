@@ -131,7 +131,7 @@ span.psw {
 .auth {
     display: flex;
     flex-direction: row;
-    padding-left: 180px;
+    padding-left: 170px;
   }
 
 .auth a{
@@ -144,14 +144,14 @@ span.psw {
     font-style: normal;
     font-weight: normal;
     text-decoration: inherit;
-    color: grey;
+    color: grey;    
     font-size: 25px;
     padding-right: 0.5em;
 }
 
-.auth .facebook-auth::before{
+.auth .yandex-auth::before{
     padding: 15px;
-    content: "\f09a";
+    content: "  \f19e";
     font-family: FontAwesome;
     font-style: normal;
     font-weight: normal;
@@ -173,9 +173,9 @@ span.psw {
     padding-right: 0.5em;
 }
 
-.auth .twitter-auth::before{
+.auth .odnoklassniki-auth::before{
     padding: 15px;
-    content: "\f099";
+    content: "\f263";
     font-family: FontAwesome;
     font-style: normal;
     font-weight: normal;

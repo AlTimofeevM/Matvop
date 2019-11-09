@@ -3,7 +3,7 @@ const router = express.Router()
 const path = require('path')
 const frontendPath = path.join(__dirname, '../../frontend')
 const userController = require('../controllers/userController')
-
+const passport = require('passport');
 
 router.get('/', (req,res)=> {
     res.redirect('/home');
@@ -24,6 +24,17 @@ router.get('/ask', (req,res) => {
 router.get('/login', (req,res)=>{
     res.render('login')
 })
+
+router.get('/auth/vkontakte',
+  passport.authenticate('vkontakte'),
+  function(req, res){
+  });
+
+  router.get('/auth/vkontakte/callback',
+  passport.authenticate('vkontakte', { failureRedirect: '/login' }),
+  function(req, res) {
+    res.redirect('/');
+  });
 
 router.get('/register', (req,res)=>{
     res.render('register')

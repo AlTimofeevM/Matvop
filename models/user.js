@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const connection = require('../config/db');
 
 const userSchema = mongoose.Schema({
+    token: String,
     name: String,
     login: String,
     password: String,

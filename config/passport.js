@@ -3,6 +3,7 @@ const LocalStrategy = require('passport-local').Strategy
 const VKontakteStrategy = require('passport-vkontakte').Strategy
 const OdnoklassnikiStrategy = require('passport-odnoklassniki').Strategy
 const YandexStrategy = require('passport-yandex').Strategy
+const GoogleStrategy = require('passport-google-oauth20').Strategy
 const db = require('../controllers/dbController')
 
 
@@ -39,6 +40,15 @@ function(accessToken, refreshToken, profile, done) {
   return db.odnoklassnikiAuth(accessToken, refreshToken, profile, done)
 })
 
+const googleStrategy = new GoogleStrategy({
+  clientID: "305979304795-vm5sbfljs29unfcd4d34qds5garbk6jt.apps.googleusercontent.com",
+  clientSecret: "_MXI2wzRK1NvrEhnFeAtPKb5",
+  callbackURL: "http://www.example.com/auth/google/callback"
+},
+function(accessToken, refreshToken, profile, cb) {
+  return db.odnoklassnikiAuth(accessToken, refreshToken, profile, cb)
+})
+
 passport.serializeUser(function(user, done) {
   console.log('Сериализация: ', user)
   done(null, user.token)
@@ -63,5 +73,6 @@ passport.use(localStrategy)
 passport.use(vkStrategy)
 passport.use(odnoklassnikiStrategy)
 passport.use(yandexStrategy)
+passport.use(googleStrategy)
 
 module.exports = passport

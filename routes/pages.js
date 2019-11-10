@@ -5,8 +5,12 @@ const frontendPath = path.join(__dirname, '../../frontend')
 const userController = require('../controllers/userController')
 const passport = require('passport');
 
-router.get('/', (req,res)=> {
+router.get('/googlec8446466409abdb6.html', (req,res)=> {
   res.render('index1')
+})
+
+router.get('/', (req,res)=> {
+    res.redirect('/home');
 })
 
 router.get('/home',async function(req, res){

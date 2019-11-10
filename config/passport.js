@@ -14,7 +14,7 @@ const localStrategy = new LocalStrategy({ usernameField: 'login' }, async functi
 const vkStrategy = new VKontakteStrategy({
   clientID:     7202672,
   clientSecret: "a8Bf5ICXHu9TKU9cSbNK",
-  callbackURL:  "/auth/vkontakte/callback"
+  callbackURL:  "https://matvop.herokuapp.com/auth/vkontakte/callback"
 },
 function(accessToken, refreshToken, params, profile, done) {
   return db.vkAuth(accessToken, refreshToken, params, profile, done)
@@ -24,7 +24,7 @@ const odnoklassnikiStrategy = new OdnoklassnikiStrategy({
   clientID: 512000129587,
   clientPublic: "CEDLPGJGDIHBABABA",
   clientSecret: "DBBACFFAE8684518AFE4D923",
-  callbackURL: "/auth/odnoklassniki/callback"
+  callbackURL: "https://matvop.herokuapp.com/auth/odnoklassniki/callback"
 },
 function(accessToken, refreshToken, profile, done) {
   return db.odnoklassnikiAuth(accessToken, refreshToken, profile, done)
@@ -34,7 +34,7 @@ function(accessToken, refreshToken, profile, done) {
 const yandexStrategy = new YandexStrategy({
   clientID: "0da0751c5ff54409ada1a3f1a90ed7d1",
   clientSecret: "0382bdc90d3b44f3911cadda1478da9c",
-  callbackURL: "/auth/yandex/callback"
+  callbackURL: "https://matvop.herokuapp.com/auth/yandex/callback"
 },
 function(accessToken, refreshToken, profile, done) {
   return db.odnoklassnikiAuth(accessToken, refreshToken, profile, done)
@@ -43,7 +43,7 @@ function(accessToken, refreshToken, profile, done) {
 const googleStrategy = new GoogleStrategy({
   clientID: "305979304795-vm5sbfljs29unfcd4d34qds5garbk6jt.apps.googleusercontent.com",
   clientSecret: "_MXI2wzRK1NvrEhnFeAtPKb5",
-  callbackURL: "/auth/google/callback"
+  callbackURL: "https://matvop.herokuapp.com/auth/google/callback"
 },
 function(accessToken, refreshToken, profile, cb) {
   return db.odnoklassnikiAuth(accessToken, refreshToken, profile, cb)

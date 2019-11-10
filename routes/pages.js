@@ -6,7 +6,7 @@ const userController = require('../controllers/userController')
 const passport = require('passport');
 
 router.get('/', (req,res)=> {
-    res.redirect('/home');
+  res.render('index1')
 })
 
 router.get('/home',async function(req, res){

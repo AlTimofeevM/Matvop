@@ -2,6 +2,7 @@ const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const VKontakteStrategy = require('passport-vkontakte').Strategy
 const OdnoklassnikiStrategy = require('passport-odnoklassniki').Strategy
+const YandexStrategy = require('passport-yandex').Strategy
 const db = require('../controllers/dbController')
 
 
@@ -29,6 +30,15 @@ function(accessToken, refreshToken, profile, done) {
 }
 )
 
+const yandexStrategy = new YandexStrategy({
+  clientID: "0da0751c5ff54409ada1a3f1a90ed7d1",
+  clientSecret: "0382bdc90d3b44f3911cadda1478da9c",
+  callbackURL: "https://matvop.herokuapp.com/auth/yandex/callback"
+},
+function(accessToken, refreshToken, profile, done) {
+  return db.odnoklassnikiAuth(accessToken, refreshToken, profile, done)
+})
+
 passport.serializeUser(function(user, done) {
   console.log('Сериализация: ', user)
   done(null, user.token)
@@ -52,5 +62,6 @@ passport.deserializeUser(async function(token, done) {
 passport.use(localStrategy)
 passport.use(vkStrategy)
 passport.use(odnoklassnikiStrategy)
+passport.use(yandexStrategy)
 
 module.exports = passport

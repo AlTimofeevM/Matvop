@@ -151,7 +151,7 @@ span.psw {
 
 .auth .yandex-auth::before{
     padding: 15px;
-    content: "  \f19e";
+    content: "\f413";
     font-family: FontAwesome;
     font-style: normal;
     font-weight: normal;

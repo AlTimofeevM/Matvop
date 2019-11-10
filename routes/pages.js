@@ -40,7 +40,21 @@ router.get('/auth/vkontakte',
   });
 
 router.get('/auth/odnoklassniki/callback',
-  passport.authenticate('odnoklassniki', { failureRedirect: '/login' }),
+  passport.authenticate('odnoklassniki', { failureRedirect: '/' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
+
+  router.get('/auth/yandex',
+  passport.authenticate('yandex'),
+  function(req, res){
+    // The request will be redirected to Yandex for authentication, so
+    // this function will not be called.
+  });
+
+router.get('/auth/yandex/callback', 
+  passport.authenticate('yandex', { failureRedirect: '/' }),
   function(req, res) {
     // Successful authentication, redirect home.
     res.redirect('/');

@@ -25,8 +25,13 @@ module.exports.register = async function (req, res){
         console.log(req.body)
         let user = await db.findUserByLogin(req.body.login)
         if (!user) {
-          await db.addUser({token: req.body.login, name : req.body.login, login: req.body.login, password: req.body.password})
-          res.redirect('/home')
+          let user = await db.addUser({token: req.body.login, name : req.body.login, login: req.body.login, password: req.body.password})
+          req.logIn(user, function(err) {
+            if (err) {
+              return next(err)
+            }
+            return res.redirect('/home')
+          })
         }else{
           res.send("Такой пользователь уже зарегистрирован")
         }

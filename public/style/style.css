@@ -73,5 +73,44 @@ nav .navigation li a{
 
 nav .navigation li:nth-last-child(2){
     padding-left: 100px;
+}
 
+.questions{
+  margin-top: 5px;
+  width: 80%;
+  margin-left: 10%;
+  display: flex;
+  flex-direction: row;
+}
+
+.questions div{
+  margin-right: 20px;
+}
+
+.questions .question-info{
+  width: 90%;
+}
+
+.questions .answers{
+  width: 10%;
+  padding-top: 5px;
+  text-align: center;
+}
+
+.line{
+  content: " ";
+  display: inline-block;
+  border-top: 1px solid #517299;
+  width: 80%;
+  vertical-align: middle;
+  margin-top: 1px;
+  margin-left: 10%;
+}
+
+.questions .answers .score{
+  font-size: 20px;
+}
+
+.questions .answers .word{
+  font-size: 12px;
 }

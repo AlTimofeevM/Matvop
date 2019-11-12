@@ -96,13 +96,28 @@
 
       <div class="container">
           <% for(var i=0; i<Quests.length;i++) {%>
-              <div class="question">
+              <div class="questions">
+                  <div class="answers">
+                    <div class="score"><%=Quests[i].answers.length%></div>
+                    <div class="word">
+                      <% if(Quests[i].answers.length == 1) {%>
+                            ответ
+                      <% }else if(Quests[i].answers.length == 2 || Quests[i].answers.length == 3 || Quests[i].answers.length == 4){%>
+                            ответa
+                      <%}else{%>
+                            ответов
+                      <%}%>
+                    </div>
+                  </div>
+                  <div  class="question-info">
                   <h4><div class="title"><%=Quests[i].title%></div></h4>
                   <div class="desription"><%=Quests[i].description%></div>
                   <form method="get" action="/question/<%= Quests[i]._id %>" class="ml-4  text-right">
                     <button type="submit" class="btn btn-secondary mr-6">Ответить</button>
-                  </form>
+                  </form>                           
+                </div>
               </div>
+              <div class="line"></div>
             <%} %>
       </div>
       <script src="https://kit.fontawesome.com/c40ea0d32b.js" crossorigin="anonymous"></script>

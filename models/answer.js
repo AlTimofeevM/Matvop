@@ -5,7 +5,8 @@ const answerSchema = mongoose.Schema({
     userLogin: String,
     answer: String,
     score: Number,
-    question: String
+    question: String,
+    userScored: [String]
 })
 
 const Answer = connection.model('Answer', answerSchema)

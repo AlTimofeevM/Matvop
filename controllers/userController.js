@@ -69,17 +69,20 @@ module.exports.answer = async function (req,res){
   let answerData = {answer : req.body.description, question: id, score: 0}
   let answer = await db.addAnswer(answerData)
   await db.addAnswerToQuestion(id,answer._id)
+  await db.userAnswered(req.user._id, id)
   res.redirect('/question/' + id)
 }
 
 module.exports.upscore = async function(req,res){
   let id = req.url.slice(9)
   await db.incAnsScore(id)
+  await db.userScored(req.user._id, id)
   res.redirect('back')
 }
 
 module.exports.downscore = async function(req,res){
   let id = req.url.slice(11)
   await db.decAnsScore(id)
+  await db.userScored(req.user._id, id)
   res.redirect('back')
 }

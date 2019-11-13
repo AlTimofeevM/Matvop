@@ -99,3 +99,11 @@ exports.isUserScored = function(id) {
     return true;
   });
 }
+
+exports.userAnswered = function(userId, questionId){
+  return QuestionModel.findOneAndUpdate({_id : questionId}, {$push : {userAnswered: userId}})
+}
+
+exports.userScored = function(userId, answerId){
+  return AnswerModel.findOneAndUpdate({_id : answerId}, {$push : {userScored: userId}})
+}

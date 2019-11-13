@@ -107,3 +107,11 @@ exports.userAnswered = function(userId, questionId){
 exports.userScored = function(userId, answerId){
   return AnswerModel.findOneAndUpdate({_id : answerId}, {$push : {userScored: userId}})
 }
+
+exports.userIsScored = async function(userId, answerId){
+  let answer = await AnswerModel.findById(answerId)
+  if(answer.userScored.indexOf(userId) == -1 ){
+    return false
+  }
+  return true
+}

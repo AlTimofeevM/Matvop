@@ -21,6 +21,16 @@ router.get('/ask', (req,res) => {
     res.render('question')
 })
 
+router.get('/question/*', async (req,res)=>{
+    res.render('answer', {data : await userController.allAnswers(req, res)})
+})
+
+router.get('/logout', (req, res) => {
+    req.logOut();
+    res.redirect('/home');
+});
+
+
 router.get('/auth/vkontakte',
   passport.authenticate('vkontakte'),
   function(req, res){
@@ -65,14 +75,5 @@ router.get('/auth/google/callback',
   function(req, res) {
     res.redirect('/');
   });
-
-router.get('/question/*', async (req,res)=>{
-    res.render('answer', {data : await userController.allAnswers(req.url)})
-})
-
-router.get('/logout', (req, res) => {
-    req.logOut();
-    res.redirect('/home');
-});
 
 module.exports = router

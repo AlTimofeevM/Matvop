@@ -53,13 +53,15 @@ module.exports.showQuestions = async function (){
   return Quests
 } 
 
-module.exports.allAnswers = async function(url) {
-  let id = url.slice(10,34)
+module.exports.allAnswers = async function(req, res) {
+  let id = req.url.slice(10,34)
   let question = await db.findQuestionById(id)
   let Ans = []
   for(let id of question.answers){
       let ans = await db.findAnswerById(id)
-      Ans.push({answer : ans.answer, score: ans.score, id: ans._id})
+      let isScored = await db.userIsScored(req.user._id, id)
+      console.log(isScored)
+      Ans.push({answer : ans.answer, score: ans.score, id: ans._id, isScored: isScored})
   }
   return {Question : question, Ans : Ans}
 }

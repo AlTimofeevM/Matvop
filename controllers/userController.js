@@ -53,7 +53,7 @@ module.exports.showQuestions = async function (){
   return Quests
 } 
 
-module.exports.allAnswers = async function(req, res) {
+module.exports.allAuthAnswers = async function(req, res) {
   let id = req.url.slice(10,34)
   let question = await db.findQuestionById(id)
   let Ans = []
@@ -62,6 +62,17 @@ module.exports.allAnswers = async function(req, res) {
       let isScored = await db.userIsScored(req.user._id, id)
       console.log(isScored)
       Ans.push({answer : ans.answer, score: ans.score, id: ans._id, isScored: isScored})
+  }
+  return {Question : question, Ans : Ans}
+}
+
+module.exports.allAnswers = async function(req, res) {
+  let id = req.url.slice(10,34)
+  let question = await db.findQuestionById(id)
+  let Ans = []
+  for(let id of question.answers){
+      let ans = await db.findAnswerById(id)
+      Ans.push({answer : ans.answer, score: ans.score, id: ans._id})
   }
   return {Question : question, Ans : Ans}
 }

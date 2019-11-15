@@ -114,3 +114,8 @@ nav .navigation li:nth-last-child(2){
 .questions .answers .word{
   font-size: 12px;
 }
+
+.container a{
+  text-decoration: none;
+  color: #1a1c1f;
+}

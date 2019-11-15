@@ -18,11 +18,19 @@ router.get('/home',async function(req, res){
 })
 
 router.get('/ask', (req,res) => {
+  if(req.isAuthenticated()){
     res.render('question')
+  }else{
+    res.send("404")
+  }
 })
 
 router.get('/question/*', async (req,res)=>{
+  if(req.isAuthenticated()){
+    res.render('answerAuth', {data : await userController.allAnswers(req, res)})
+  }else{
     res.render('answer', {data : await userController.allAnswers(req, res)})
+  }  
 })
 
 router.get('/logout', (req, res) => {

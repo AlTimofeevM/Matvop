@@ -96,6 +96,7 @@
 
       <div class="container">
           <% for(var i=0; i<Quests.length;i++) {%>
+            <a href="/question/<%= Quests[i]._id %>">
               <div class="questions">
                   <div class="answers">
                     <div class="score"><%=Quests[i].answers.length%></div>
@@ -111,12 +112,10 @@
                   </div>
                   <div  class="question-info">
                   <h4><div class="title"><%=Quests[i].title%></div></h4>
-                  <div class="desription"><%=Quests[i].description%></div>
-                  <form method="get" action="/question/<%= Quests[i]._id %>" class="ml-4  text-right">
-                    <button type="submit" class="btn btn-secondary mr-6">Ответить</button>
-                  </form>                           
+                  <div class="desription"><%=Quests[i].description%></div>                          
                 </div>
               </div>
+            </a>
               <div class="line"></div>
             <%} %>
       </div>

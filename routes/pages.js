@@ -21,7 +21,7 @@ router.get('/ask', (req,res) => {
   if(req.isAuthenticated()){
     res.render('question')
   }else{
-    res.send("404")
+    res.redirect("404error404")
   }
 })
 
@@ -83,5 +83,9 @@ router.get('/auth/google/callback',
   function(req, res) {
     res.redirect('/');
   });
+
+router.get('/*', (req,res)=> {
+  res.render("404")
+})
 
 module.exports = router

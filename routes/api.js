@@ -8,5 +8,6 @@ router.post('/ask', userController.ask)
 router.post('/answer=*', userController.answer)
 router.post('/upscore=*', userController.upscore)
 router.post('/downscore=*', userController.downscore)
+router.post('/findQuestion', userController.findQuestion)
 
 module.exports = router

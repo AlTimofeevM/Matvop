@@ -115,3 +115,7 @@ exports.userIsScored = async function(userId, answerId){
   }
   return true
 }
+
+exports.findQuestions = function(text){
+  return QuestionModel.find({ description : { $regex: text, $options: 'i' } })
+}

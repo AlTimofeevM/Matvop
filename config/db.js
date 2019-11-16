@@ -1,8 +1,14 @@
 const mongoose = require('mongoose')
 
+
 mongoose.connect(
     'mongodb://MyUser:passuser1pass@ds024778.mlab.com:24778/alextimofeev',
-  { useNewUrlParser: true }
+  { 
+      useNewUrlParser: true,
+      useCreateIndex: true,
+      useFindAndModify: false,
+      useUnifiedTopology: true
+    }
 )
 
 const connection = mongoose.connection

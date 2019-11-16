@@ -99,3 +99,8 @@ module.exports.downscore = async function(req,res){
   await db.userScored(req.user._id, id)
   res.redirect('back')
 }
+
+module.exports.findQuestion = async function(req, res) {
+  let text = req.body.text.toLowerCase()
+  console.log(await db.findQuestions(text))
+}

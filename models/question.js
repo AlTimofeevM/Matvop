@@ -10,6 +10,7 @@ const questionSchema = mongoose.Schema({
     userAnswered: [String]
 })
 
+
 const Question = connection.model('Question', questionSchema)
 
 module.exports = Question

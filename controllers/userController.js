@@ -100,7 +100,11 @@ module.exports.downscore = async function(req,res){
   res.redirect('back')
 }
 
-module.exports.findQuestion = async function(req, res) {
-  let text = req.body.text.toLowerCase()
-  console.log(await db.findQuestions(text))
+module.exports.findQuestion =  function(req, res) {
+  let text = encodeURI(req.body.text)
+  res.redirect('question=' +  text)
+}
+
+module.exports.searchQuestion = async function(text) {
+  return await db.findQuestions(text)
 }

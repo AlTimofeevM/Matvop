@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="img/favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="style/style.css"/>
+    <link rel="stylesheet" type="text/css" href="style/login.css"/>
+    <title>Matvop</title>
+  </head>
+  <body>
+    <nav>
+      <div class="logo">
+          <a href="/">Матвоп<sub>α</sub></a>
+      </div>
+      <div class="navigation">
+          <ul class="navbar-">
+            <li>
+                <a href="/">Главная</a>
+            </li>
+            <li class="search">
+                <form action="/findQuestion" method="POST">
+                  <input type="text" name="text" placeholder="Искать здесь...">
+                  <button type="submit"></button>
+                </form>
+            </li>
+            <li>
+                <a href="#" onclick="document.getElementById('modal2').style.display='block'">Зарегистрироваться</a>
+            </li>
+            <li>
+                <a href="#" onclick="document.getElementById('modal1').style.display='block'">Войти</a>
+            </li>
+          </ul>
+      </div>
+    </nav>
+
+    <div id="modal1" class="modal">
+      <div class="modal-content animate">
+        <form action="/login" method="POST">
+          <div class="imgcontainer">
+            <span onclick="document.getElementById('modal1').style.display='none'" class="close" title="Close Modal">×</span>
+          </div>    
+          <div class="container">
+            <label for="uname"><b>Логин</b></label>
+            <input type="text" placeholder="Enter Username" name="login" required>
+      
+            <label for="psw"><b>Пароль</b></label>
+            <input type="password" placeholder="Enter Password" name="password" required>
+              
+            <button type="submit">Войти</button>
+          </div>
+          </form>
+          <div class="or">
+            <span>или</span>
+          </div>
+          <div class="auth">
+            <a href="/auth/yandex" class="yandex-auth"></a>
+            <a href="/auth/vkontakte" class="vk-auth"></a>
+            <a href="/auth/odnoklassniki" class="odnoklassniki-auth"></a>
+            <a href="/auth/google" class="google-auth"></a>
+          </div>
+      </div>
+    </div>
+    
+    <div id="modal2" class="modal" >
+      <div class="modal-content animate">
+        <form  action="/register" method="POST">
+          <div class="imgcontainer">
+            <span onclick="document.getElementById('modal2').style.display='none'" class="close" title="Close Modal">×</span>
+          </div>
+      
+          <div class="container">
+            <label for="uname"><b>Логин</b></label>
+            <input type="text" placeholder="Enter Username" name="login" required>
+      
+            <label for="psw"><b>Пароль</b></label>
+            <input type="password" placeholder="Enter Password" name="password" required>
+              
+            <button type="submit">Зарегистрироваться</button>
+          </div>
+        </form>
+        <div class="or">
+            <span>или</span>
+          </div>
+          <div class="auth">
+            <a href="/auth/yandex" class="yandex-auth"></a>
+            <a href="/auth/vkontakte" class="vk-auth"></a>
+            <a href="/auth/odnoklassniki" class="odnoklassniki-auth"></a>
+            <a href="/auth/google" class="google-auth"></a>
+          </div>
+      </div>
+      </div>
+    </div>
+
+      <div class="container">
+          <% for(var i=0; i<Quests.length;i++) {%>
+            <a href="/question/<%= Quests[i]._id %>">
+              <div class="questions">
+                  <div class="answers">
+                    <div class="score"><%=Quests[i].answers.length%></div>
+                    <div class="word">
+                      <% if(Quests[i].answers.length == 1) {%>
+                            ответ
+                      <% }else if(Quests[i].answers.length == 2 || Quests[i].answers.length == 3 || Quests[i].answers.length == 4){%>
+                            ответa
+                      <%}else{%>
+                            ответов
+                      <%}%>
+                    </div>
+                  </div>
+                  <div  class="question-info">
+                  <h4><div class="title"><%=Quests[i].title%></div></h4>
+                  <div class="desription"><%=Quests[i].description%></div>                          
+                </div>
+              </div>
+            </a>
+              <div class="line"></div>
+            <%} %>
+      </div>
+      <script src="https://kit.fontawesome.com/c40ea0d32b.js" crossorigin="anonymous"></script>
+      <script src="js/modal.js"></script>
+  </body>
+</html>

@@ -17,6 +17,15 @@ router.get('/home',async function(req, res){
     }
 })
 
+router.get('/question=*',async function(req, res){
+  let text = decodeURI(req.url.slice(10))
+  if(req.isAuthenticated()){
+      res.render('searchQuestionAuth', {Quests : await userController.searchQuestion(text)})
+  }else{
+      res.render('searchQuestion', {Quests : await userController.searchQuestion(text)})
+  }
+})
+
 router.get('/ask', (req,res) => {
   if(req.isAuthenticated()){
     res.render('question')

@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="../style/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../style/answer.css"/>
+    <link rel="stylesheet" type="text/css" href="../style/login.css"/>
     <title>Matvop</title>
   </head>
   <body>
@@ -20,38 +22,98 @@
                 <a href="/">Главная</a>
             </li>
             <li class="search">
-                <form>
-                  <input type="text" placeholder="Искать здесь...">
+                <form action="/findQuestion" method="POST">
+                  <input type="text" name="text" placeholder="Искать здесь...">
                   <button type="submit"></button>
                 </form>
             </li>
             <li>
-              <a href="/ask">Задать вопроc</a>
-           </li>         
+                <a href="#" onclick="document.getElementById('modal2').style.display='block'">Зарегистрироваться</a>
+            </li>
             <li>
-                <a href="/logout">Выйти</a>
+                <a href="#" onclick="document.getElementById('modal1').style.display='block'">Войти</a>
             </li>
           </ul>
       </div>
-    </nav>
-      <br/>
+    </nav>  
+
+    <div id="modal1" class="modal">
+      <div class="modal-content animate">
+        <form action="/login" method="POST">
+          <div class="imgcontainer">
+            <span onclick="document.getElementById('modal1').style.display='none'" class="close" title="Close Modal">×</span>
+          </div>    
+          <div class="container">
+            <label for="uname"><b>Логин</b></label>
+            <input type="text" placeholder="Enter Username" name="login" required>
+      
+            <label for="psw"><b>Пароль</b></label>
+            <input type="password" placeholder="Enter Password" name="password" required>
+              
+            <button type="submit">Войти</button>
+          </div>
+          </form>
+          <div class="or">
+            <span>или</span>
+          </div>
+          <div class="auth">
+            <a href="/auth/yandex" class="yandex-auth"></a>
+            <a href="/auth/vkontakte" class="vk-auth"></a>
+            <a href="/auth/odnoklassniki" class="odnoklassniki-auth"></a>
+            <a href="/auth/google" class="google-auth"></a>
+          </div>
+      </div>
+    </div>
+    
+    <div id="modal2" class="modal" >
+      <div class="modal-content animate">
+        <form  action="/register" method="POST">
+          <div class="imgcontainer">
+            <span onclick="document.getElementById('modal2').style.display='none'" class="close" title="Close Modal">×</span>
+          </div>
+      
+          <div class="container">
+            <label for="uname"><b>Логин</b></label>
+            <input type="text" placeholder="Enter Username" name="login" required>
+      
+            <label for="psw"><b>Пароль</b></label>
+            <input type="password" placeholder="Enter Password" name="password" required>
+              
+            <button type="submit">Зарегистрироваться</button>
+          </div>
+        </form>
+        <div class="or">
+            <span>или</span>
+          </div>
+          <div class="auth">
+            <a href="/auth/yandex" class="yandex-auth"></a>
+            <a href="/auth/vkontakte" class="vk-auth"></a>
+            <a href="/auth/odnoklassniki" class="odnoklassniki-auth"></a>
+            <a href="/auth/google" class="google-auth"></a>
+          </div>
+      </div>
+      </div>
+    </div>
       <div class="container">
-        
-        <div class="container" id = "question">
-            <h4><div class="title"><%= data.Question.title %></div></h4>
-            <div class="desription"><%= data.Question.description %></div>
-            <br/>
+        <div class="question-a" id = "question">
+            <div class="title"><%= data.Question.title %></div>
+            <div class="description"><%= data.Question.description %></div>
         </div>
-        <div class="container" id = "answers">
+        <div class="line"></div>
+        <div class="answers-a" id = "answers">
             <% for(var i=0; i<data.Ans.length;i++) {%>
-                <h4><div class="title"><%= data.Ans[i].answer %></div></h4>
-                  <div class="score"><%= data.Ans[i].score %></div>
-                <br/>
+            <div class="answer-info">
+                <div class="score"><%= data.Ans[i].score %></div>
+                <div class="text"><%= data.Ans[i].answer %></div>
+            </div>
+            <div class="line"></div>
             <%} %>
         </div>
       </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/c40ea0d32b.js" crossorigin="anonymous"></script>
+    <script src="../js/modal.js"></script>
   </body>
 </html>

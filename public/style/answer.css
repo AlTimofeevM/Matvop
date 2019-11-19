@@ -1,0 +1,79 @@
+.container {
+    margin-top: 30px;
+}
+
+.container .question-a{
+    margin-left: 17%;
+}
+
+.container .question-a .title{
+    font-size: 25px;
+}
+
+.container .question-a .description{
+    font-size: 18px;
+}
+
+.answers-a .answer-info{
+    display: flex;
+    flex-direction: row;
+    margin-left: 8%;
+}
+
+.container .answers-a .text{
+    width: 90%;
+}
+
+.container .answers-a .score{
+    width: 10%;
+    text-align: center;
+    font-size: 25px;
+}
+
+.container .answers-a .scoreNum{
+    margin-right: 10%;
+
+}
+
+.container .answers-a .score button{
+    padding: 0;
+    border: none;
+    outline: none;
+    font: inherit;
+    color: inherit;
+    background: none;
+    box-shadow: none;
+}
+
+.container .answers-a .score .upscore::before{
+    content: "\f077";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    color: grey;    
+    font-size: 25px;
+    padding-right: 0.5em;
+}
+
+.container .answers-a .score .downscore::before{
+    content: "\f078";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    color: grey;    
+    font-size: 25px;
+    padding-right: 0.5em;
+}
+
+.container .answers-a .text{
+    font-size: 17px;
+}
+
+
+.answer form{
+    margin-top: 10px;
+    margin-left: 10%;
+    width: 80%;
+}

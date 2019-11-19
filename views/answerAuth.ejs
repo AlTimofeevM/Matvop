@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="../style/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../style/answer.css"/>
     <title>Matvop</title>
   </head>
   <body>
@@ -37,38 +38,42 @@
       <br/>
       <div class="container">
         
-        <div class="container" id = "question">
-            <h4><div class="title"><%= data.Question.title %></div></h4>
-            <div class="desription"><%= data.Question.description %></div>
-            <br/>
+        <div class="question-a" id = "question">
+            <div class="title"><%= data.Question.title %></div>
+            <div class="description"><%= data.Question.description %></div>
         </div>
-        <div class="container" id = "answers">
+        <div class="line"></div>
+        <div  class="answers-a" id = "answers">
             <% for(var i=0; i<data.Ans.length;i++) {%>
-                <h4><div class="title"><%= data.Ans[i].answer %></div></h4>
-                <% if(data.Ans[i].isScored){ %>
-                  <div class="score"><%= data.Ans[i].score %></div>
-                <%}else{%>
-                <form method="post" action="/upscore=<%= data.Ans[i].id %>">
-                  <button type="submit">&and;</button>
-                </form>
-                <div class="score"><%= data.Ans[i].score %></div>
-                <form method="post" action="/downscore=<%= data.Ans[i].id %>">
-                  <button type="submit">&or;</button>
-                </form>
-                <%}%>
-                <br/>
+              <div class="answer-info">
+                <div class="score">
+                  <% if(data.Ans[i].isScored){ %>
+                    <div><%= data.Ans[i].score %></div>
+                  <%}else{%>
+                  <form method="post" action="/upscore=<%= data.Ans[i].id %>">
+                    <button type="submit" class="upscore"></button>
+                  </form>
+                  <div class="scoreNum"><%= data.Ans[i].score %></div>
+                  <form method="post" action="/downscore=<%= data.Ans[i].id %>">
+                    <button type="submit" class="downscore"></button>
+                  </form>
+                  <%}%>
+                </div>
+                <div class="text"><%= data.Ans[i].answer %></div>    
+              </div>
+              <div class="line"></div>
             <%} %>
         </div>
-        <div class="container" id = "answer">
+      </div>
+        <div class="answer" id = "answer">
             <form method="post" action="/answer=<%= data.Question._id %>">
               <h4><label for="exampleInputTitle1">Ваш ответ:</label></h4>
               <div class="form-group">
                 <textarea rows="10" class="form-control" name="description" required></textarea>
               </div>
-              <button type="submit" class="btn btn-primary">Ответить</button>
+              <button type="submit" class="btn btn-dark">Ответить</button>
             </form>
         </div>
-      </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

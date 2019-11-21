@@ -36,7 +36,7 @@ router.get('/ask', (req,res) => {
 
 router.get('/question/*', async (req,res)=>{
   if(req.isAuthenticated()){
-    res.render('answerAuth', {data : await userController.allAnswers(req, res)})
+    res.render('answerAuth', {data : await userController.allAuthAnswers(req, res)})
   }else{
     res.render('answer', {data : await userController.allAnswers(req, res)})
   }  

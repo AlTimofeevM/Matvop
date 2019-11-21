@@ -94,19 +94,24 @@
       </div>
       </div>
     </div>
-      <div class="container">
+    <div class="container">
+        
         <div class="question-a" id = "question">
             <div class="title"><%= data.Question.title %></div>
             <div class="description"><%= data.Question.description %></div>
         </div>
         <div class="line"></div>
-        <div class="answers-a" id = "answers">
+        <div  class="answers-a" id = "answers">
             <% for(var i=0; i<data.Ans.length;i++) {%>
-            <div class="answer-info">
-                <div class="score"><%= data.Ans[i].score %></div>
-                <div class="text"><%= data.Ans[i].answer %></div>
-            </div>
-            <div class="line"></div>
+              <div class="answer-info">
+                <div class="score">
+                  <button type="submit" class="upscore" title="Войдите чтобы головать" onclick="document.getElementById('modal1').style.display='block'"></button>
+                  <div class="scoreNum"><%= data.Ans[i].score %></div>
+                  <button type="submit" class="downscore" title="Войдите чтобы головать" onclick="document.getElementById('modal1').style.display='block'"></button>
+                </div>
+                <div class="text"><%= data.Ans[i].answer %></div>    
+              </div>
+              <div class="line"></div>
             <%} %>
         </div>
       </div>

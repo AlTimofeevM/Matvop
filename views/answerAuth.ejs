@@ -35,7 +35,7 @@
           </ul>
       </div>
     </nav>
-      <br/>
+
       <div class="container">
         
         <div class="question-a" id = "question">
@@ -48,10 +48,12 @@
               <div class="answer-info">
                 <div class="score">
                   <% if(data.Ans[i].isScored){ %>
-                    <div><%= data.Ans[i].score %></div>
+                    <button type="submit" class="upscore" title="Вы уже голосовали"></button>
+                    <div class="scoreNum"><%= data.Ans[i].score %></div>
+                    <button type="submit" class="downscore" title="Вы уже голосовали"></button>
                   <%}else{%>
                   <form method="post" action="/upscore=<%= data.Ans[i].id %>">
-                    <button type="submit" class="upscore"></button>
+                    <button type="submit" class="upscore" alt="fds"></button>
                   </form>
                   <div class="scoreNum"><%= data.Ans[i].score %></div>
                   <form method="post" action="/downscore=<%= data.Ans[i].id %>">

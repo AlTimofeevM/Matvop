@@ -60,7 +60,6 @@ module.exports.allAuthAnswers = async function(req, res) {
   for(let id of question.answers){
       let ans = await db.findAnswerById(id)
       let isScored = await db.userIsScored(req.user._id, id)
-      console.log(isScored)
       Ans.push({answer : ans.answer, score: ans.score, id: ans._id, isScored: isScored})
   }
   return {Question : question, Ans : Ans}

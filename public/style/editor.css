@@ -1,0 +1,49 @@
+.editor {
+    border: 1px solid gray;
+    margin-bottom: 10px;
+}
+
+
+
+.editor button{
+    padding: 0;
+    border: none;
+    outline: none;
+    font: inherit;
+    color: inherit;
+    background: none;
+    box-shadow: none;
+}
+
+.editor ul{
+    display: flex;
+    flex-direction: row;
+    margin: 5px;
+}
+
+.editor li{
+    list-style-type: none;
+    margin-right: 10px;
+}
+
+.editor li .bold-btn::before{
+    content: "\f032";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    color: grey;    
+    font-size: 25px;
+    padding-right: 0.5em;
+}
+
+.editor li .italic-btn::before{
+    content: "\f033";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    color: grey;    
+    font-size: 25px;
+    padding-right: 0.5em;
+}

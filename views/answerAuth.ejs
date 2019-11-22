@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="../style/style.css"/>
     <link rel="stylesheet" type="text/css" href="../style/answer.css"/>
+    <link rel="stylesheet" type="text/css" href="../style/editor.css"/>
     <title>Matvop</title>
   </head>
   <body>
@@ -70,10 +71,23 @@
         <div class="answer" id = "answer">
             <form method="post" action="/answer=<%= data.Question._id %>">
               <h4><label for="exampleInputTitle1">Ваш ответ:</label></h4>
-              <div class="form-group">
-                <textarea rows="10" class="form-control" name="description" required></textarea>
+              <div class="editor">
+                <div class="bar">
+                  <ul>
+                    <li><button type="button" class="bold-btn"  
+                      onclick="document.getElementById('text').value+='<Жирный текст><Жирный текст>'" >
+                    </button></li>
+                    <li><button type="button" class="italic-btn"
+                      onclick="document.getElementById('text').value+='<Наклонный текст><Наклонный текст>'">
+                    </button></li>
+                  </ul>
+                </div>
+                <div class="form-group">
+                  <textarea rows="10" class="form-control" name="description" id="text" required></textarea>
+                </div>
               </div>
               <button type="submit" class="btn btn-dark">Ответить</button>
+              
             </form>
         </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

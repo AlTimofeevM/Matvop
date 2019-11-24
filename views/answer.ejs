@@ -109,7 +109,14 @@
                   <div class="scoreNum"><%= data.Ans[i].score %></div>
                   <button type="submit" class="downscore" title="Войдите чтобы головать" onclick="document.getElementById('modal1').style.display='block'"></button>
                 </div>
-                <div class="text"><%= data.Ans[i].answer %></div>    
+                <div class="text">
+                  <% let arr = data.Ans[i].answer.split("<Ж>") %>
+                  <%= arr[0]%>
+                  <% for(var j=1; j<arr.length-1 ;j = j + 2) {%>
+                      <b> <%= arr[j]%></b>
+                      <%= arr[j+1]%>
+                  <%}%>
+                </div>    
               </div>
               <div class="line"></div>
             <%} %>

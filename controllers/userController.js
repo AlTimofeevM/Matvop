@@ -78,7 +78,8 @@ module.exports.allAnswers = async function(req, res) {
 
 module.exports.answer = async function (req,res){
   let id = req.url.slice(8)
-  let answerData = {answer : req.body.description, question: id, score: 0}
+  let answerData = {answer : req.body.description , question: id, score: 0}
+  console.log(answerData)
   let answer = await db.addAnswer(answerData)
   await db.addAnswerToQuestion(id,answer._id)
   await db.userAnswered(req.user._id, id)

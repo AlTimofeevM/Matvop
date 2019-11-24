@@ -63,11 +63,33 @@
                   <%}%>
                 </div>
                 <div class="text">
-                    <% let arr = data.Ans[i].answer.split("<Ж>") %>
-                    <%= arr[0]%>
-                    <% for(var j=1; j<arr.length-1 ;j = j + 2) {%>
-                        <b> <%= arr[j]%></b>
-                        <%= arr[j+1]%>
+                    <% let arr1 = data.Ans[i].answer.split("<Ж>") %>
+                    <% for(let j=0; j<arr1.length ;j++) {%>
+                      <%if(j%2==1){%>
+                        <b> 
+                            <%let arr2 = arr1[j].split("<Н>")%>
+                            <% for(let k=0; k<arr2.length ;k++) {%>
+                              <%if(k%2==1){%>
+                                <em>
+                                  <%=arr2[k]%>
+                                </em>
+                              <%}else{%>
+                                <%=arr2[k]%>
+                              <%}%>
+                            <%}%>
+                        </b>
+                      <%}else{%>
+                        <%let arr2 = arr1[j].split("<Н>")%>
+                        <% for(let k=0; k<arr2.length ;k++) {%>
+                          <%if(k%2==1){%>
+                            <em>
+                              <%=arr2[k]%>
+                            </em>
+                          <%}else{%>
+                            <%=arr2[k]%>
+                          <%}%>
+                        <%}%>
+                      <%}%>
                     <%}%>
                 </div>    
               </div>

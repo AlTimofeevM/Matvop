@@ -110,12 +110,78 @@
                   <button type="submit" class="downscore" title="Войдите чтобы головать" onclick="document.getElementById('modal1').style.display='block'"></button>
                 </div>
                 <div class="text">
-                  <% let arr = data.Ans[i].answer.split("<Ж>") %>
-                  <%= arr[0]%>
-                  <% for(var j=1; j<arr.length-1 ;j = j + 2) {%>
-                      <b> <%= arr[j]%></b>
-                      <%= arr[j+1]%>
-                  <%}%>
+                  <% let k = 0                                         %>
+                    <% let t = -1                                        %>
+                    <% let b = 0                                         %>
+                    <% let it = 0                                        %>
+                    <% let string = ''                                   %>
+                    <% for(let j=0; j < data.Ans[i].answer.length; ++j){ %>
+                    <%    if(k==0){                                      %>
+                    <%      if(data.Ans[i].answer[j] === '<'){           %>
+                    <%        ++k                                        %>
+                    <%      }else{                                       %>
+                    <%        string += data.Ans[i].answer[j]            %>
+                    <%      }                                            %>
+                    <%    }else{                                         %>
+                    <%      if(k==1){                                    %>
+                    <%        if(data.Ans[i].answer[j] === 'Ж'){         %>
+                    <%          ++k                                      %>
+                    <%          t = 0                                    %>
+                    <%        }else{                                     %>
+                    <%          if(data.Ans[i].answer[j] === 'Н'){       %>
+                    <%            ++k                                    %>
+                    <%            t = 1                                  %>
+                    <%          }else{                                   %>
+                    <%            string +='<'                           %>
+                    <%            k=0                                    %> 
+                    <%          }                                        %>
+                    <%        }                                          %>
+                    <%    }else{                                         %>
+                    <%      if(k==2){                                    %>
+                    <%        if(data.Ans[i].answer[j] === '>'){         %>
+                    <%          if(t==0){                                %>
+                                  <%= string %>
+                    <%            if(b%2==0){                            %>
+                                    <b>
+                    <%            }else{                                 %>
+                                    </b>
+                    <%            }                                      %>
+                    <%            string=''                              %>
+                    <%            k=0                                    %>
+                    <%            ++b                                    %> 
+                    <%          }                                        %>
+                    <%          if(t==1){                                %>
+                                  <%= string %>
+                    <%            if(it%2==0){                           %>
+                                    <em>
+                    <%            }else{                                 %>
+                                    </em>
+                    <%            }                                      %>
+                    <%            string=''                              %>
+                    <%            k=0                                    %>
+                    <%            ++it                                   %> 
+                    <%          }                                        %>
+                    <%        }else{                                     %>
+                    <%          if(t==0){                                %>
+                    <%            string += 'Ж'                          %>
+                    <%            k=0                                    %>              
+                    <%          }                                        %>
+                    <%          if(t==1){                                %>
+                    <%             string +='Н'                          %>
+                    <%            k=0                                    %> 
+                    <%          }                                        %>
+                    <%        }                                          %>
+                    <%      }                                            %>
+                    <%    }                                              %>
+                    <%  }                                                %>
+                    <% }                                                 %>
+                        <%= string %>
+                    <% if(b%2==1){                                       %>
+                        </b>
+                    <% }                                                 %>
+                    <% if(it%2==1){                                      %>
+                        </em>
+                    <% }                                                 %> 
                 </div>    
               </div>
               <div class="line"></div>

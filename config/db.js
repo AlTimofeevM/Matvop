@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 
 mongoose.connect(
-    'mongodb://MyUser:passuser1pass@ds024778.mlab.com:24778/alextimofeev',
+    'mongodb://MyUser:passuser1pass@ds018839.mlab.com:18839/alextimofeev',
   { 
       useNewUrlParser: true,
       useCreateIndex: true,

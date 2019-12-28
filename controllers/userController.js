@@ -23,9 +23,15 @@ module.exports.login = function(req,res,next){
 module.exports.register = async function (req, res){
     try{
         console.log(req.body)
-        let user = await db.findUserByLogin(req.body.login)
+        let user = await db.findUserByEmail(req.body.email)
         if (!user) {
-          let user = await db.addUser({token: req.body.login, name : req.body.login, login: req.body.login, password: req.body.password})
+          let options = {
+            year: 'numeric',
+            month: 'numeric',
+            day: 'numeric'
+          }
+          let date = new Date().toLocaleString('ru', options)
+          let user = await db.addUser({token: req.body.email, name : req.body.email, email: req.body.email, password: req.body.password, registrationDate: date})
           req.logIn(user, function(err) {
             if (err) {
               return next(err)

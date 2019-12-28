@@ -10,12 +10,12 @@ exports.findUserByToken = function (token) {
   return UserModel.findOne({token: token})
 }
 
-exports.findUserByLogin = function (login) {
-  return UserModel.findOne({login: login})
+exports.findUserByEmail = function (email) {
+  return UserModel.findOne({email: email})
 }
 
-exports.userLogin =  function(login, password, done) {
-    UserModel.findOne({ login : login }, function(err, user) {
+exports.userLogin =  function(email, password, done) {
+    UserModel.findOne({ email : email }, function(err, user) {
       if (err) { return done(err); }
       if (!user) {
         return done(null, false, { message: 'Incorrect login.' });
@@ -32,7 +32,13 @@ exports.vkAuth = function(accessToken, refreshToken, params, profile, done) {
   UserModel.findOne({ token: profile.id }, function(err, user) {
     if (err) { return done(err); }
     if (!user) {
-      let user = UserModel.create({token: profile.id})
+      let options = {
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric'
+      }
+      let date = new Date().toLocaleString('ru', options)
+      let user = UserModel.create({token: profile.id, registrationDate: date})
     }
     return done(null, user);
   })
@@ -43,7 +49,13 @@ exports.odnoklassnikiAuth = function(accessToken, refreshToken, profile, done) {
   UserModel.findOne({ token: profile.id }, function(err, user) {
     if (err) { return done(err); }
     if (!user) {
-      let user = UserModel.create({token: profile.id})
+      let options = {
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric'
+      }
+      let date = new Date().toLocaleString('ru', options)
+      let user = UserModel.create({token: profile.id, registrationDate: date})
     }
     return done(null, user);
   })

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const connection = require('../config/db');
 
 const answerSchema = mongoose.Schema({
-    userLogin: String,
+    userEmail: String,
     answer: String,
     score: Number,
     question: String,

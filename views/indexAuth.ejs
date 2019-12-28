@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="style/style.css"/>
+    <link rel="stylesheet" type="text/css" href="style/profile.css"/>
     <title>Matvop</title>
   </head>
   <body>
@@ -15,7 +16,7 @@
           <a href="/">Матвоп<sub>α</sub></a>
       </div>
       <div class="navigation">
-          <ul class="navbar-">
+          <ul class="navbar">
             <li>
                 <a href="/">Главная</a>
             </li>
@@ -29,11 +30,19 @@
                 <a href="/ask">Задать вопроc</a>
             </li>
             <li>
-                <a href="/logout">Выйти</a>
+              <a href="#" class="user-profile" onclick="document.getElementById('profile').style.display='block'"></a>
             </li>
           </ul>
       </div>
     </nav>
+    <div id="profile" class="modal">
+      <div class="modal-content animate">
+        <ul class="submenu">
+          <li><a href="#">Профиль</a></li>
+          <li><a href="/logout">Выйти</a></li>
+        </ul>
+      </div>
+    </div>
     <div class="container  my-5 my-lg-2 ml-6 mr-6">
       <br/>
       <div class="container">
@@ -67,5 +76,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="js/profile.js"></script>
   </body>
 </html>

@@ -31,7 +31,7 @@ module.exports.register = async function (req, res){
             day: 'numeric'
           }
           let date = new Date().toLocaleString('ru', options)
-          let user = await db.addUser({token: req.body.email, name : req.body.email, email: req.body.email, password: req.body.password, registrationDate: date})
+          let user = await db.addUser({token: req.body.username, name : req.body.username, email: req.body.email, password: req.body.password, registrationDate: date})
           req.logIn(user, function(err) {
             if (err) {
               return next(err)
@@ -48,7 +48,13 @@ module.exports.register = async function (req, res){
 }
 
 module.exports.ask = async function (req,res){
-  let questionData = {userLogin: req.user._id, title: req.body.title, description: req.body.description}
+  let options = {
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric'
+  }
+  let date = new Date().toLocaleString('ru', options)
+  let questionData = {userId: req.user._id, title: req.body.title, description: req.body.description,creationDate:date}
   let question = await db.addQuestion(questionData)
   await db.addQuestionToUser(req.user._id, question._id)
   res.redirect('/home')
@@ -83,8 +89,14 @@ module.exports.allAnswers = async function(req, res) {
 }
 
 module.exports.answer = async function (req,res){
+  let options = {
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric'
+  }
+  let date = new Date().toLocaleString('ru', options)
   let id = req.url.slice(8)
-  let answerData = {answer : req.body.description , question: id, score: 0}
+  let answerData = {answer : req.body.description , question: id, score: 0,creationDate:date}
   console.log(answerData)
   let answer = await db.addAnswer(answerData)
   await db.addAnswerToQuestion(id,answer._id)
@@ -113,4 +125,12 @@ module.exports.findQuestion =  function(req, res) {
 
 module.exports.searchQuestion = async function(text) {
   return await db.findQuestions(text)
+}
+
+module.exports.findUserByUsername = async function(username){
+  return await db.findUserByUsername(username)
+}
+
+module.exports.findUserByToken = async function(username){
+  return await db.findUserByToken(username)
 }

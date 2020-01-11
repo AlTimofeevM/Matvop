@@ -9,12 +9,29 @@ router.get('/', (req,res)=> {
     res.redirect('/home');
 })
 
-router.get('/home',async function(req, res){
+router.get('/home', async function(req, res){
     if(req.isAuthenticated()){
-        res.render('indexAuth', {Quests : await userController.showQuestions()})
+        res.render('indexAuth', {Quests : await userController.showQuestions(), user : req.user.token})
     }else{
         res.render('index', {Quests : await userController.showQuestions()})
     }
+})
+
+router.get('/user/*', async (req,res)=>{
+  let user = await userController.findUserByToken(req.url.slice(6))
+  if(!user){
+    res.render("404")
+  }else{
+    if(req.isAuthenticated){
+      if(user.token === req.user.token){
+        res.render("userPage",{user : req.user.token})
+      }else{
+        res.render("profile",{username: user.token, email: user.email})
+      }
+    }else{
+      res.render("profile",{user:user})
+    }
+  }
 })
 
 router.get('/question=*',async function(req, res){
@@ -36,7 +53,7 @@ router.get('/ask', (req,res) => {
 
 router.get('/question/*', async (req,res)=>{
   if(req.isAuthenticated()){
-    res.render('answerAuth', {data : await userController.allAuthAnswers(req, res)})
+    res.render('answerAuth', {data : await userController.allAuthAnswers(req, res),user : req.user.token})
   }else{
     res.render('answer', {data : await userController.allAnswers(req, res)})
   }  

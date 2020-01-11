@@ -3,12 +3,38 @@
     margin: 0;
 }
 
-body {font-family: Arial, Helvetica, sans-serif;}
+html{
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+.wrapper {
+  display: flex;
+	flex-direction: column;
+	min-height: 100%;
+}
+
+.cont {
+  flex: 1 0 auto;
+}
 
 nav {
     display: flex;
     flex-direction: row;
     background-color: #343a3f;
+}
+
+footer {
+  flex: 0 0 auto;
+  color: #fff;
+  background-color: #343a3f;
+  text-align: center;
 }
 
 nav .logo {

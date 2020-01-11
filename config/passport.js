@@ -7,8 +7,8 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy
 const db = require('../controllers/dbController')
 
 
-const localStrategy = new LocalStrategy({ usernameField: 'login' }, async function(login,password,done) {
-  return await db.userLogin(login, password, done)
+const localStrategy = new LocalStrategy({ usernameField: 'email' }, async function(email,password,done) {
+  return await db.userLogin(email, password, done)
 })
 
 const vkStrategy = new VKontakteStrategy({

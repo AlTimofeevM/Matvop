@@ -6,8 +6,8 @@
     <link rel="shortcut icon" href="img/favicon.png" type="image/png">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="style/style.css"/>
-    <link rel="stylesheet" type="text/css" href="style/profile.css"/>
+    <link rel="stylesheet" type="text/css" href="../style/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../style/profile.css"/>
     <title>Matvop</title>
   </head>
   <body>
@@ -41,10 +41,7 @@
           <div class="modal-content animate">
             <ul class="submenu">
               <li>
-                <a href="/user/<%=user%>">Профиль</a>
-              </li>
-              <li>
-                <a>Помощь</a>
+                <a href="/profile">Профиль</a>
               </li>
               <li>
                 <a href="/logout">Выйти</a>
@@ -55,35 +52,7 @@
         <div class="container  my-5 my-lg-2 ml-6 mr-6">
           <br/>
           <div class="container">
-            <% for(var i=0; i<Quests.length;i++) {%>
-              <a href="/question/<%= Quests[i]._id %>">
-                <div class="questions">
-                  <div class="answers">
-                    <div class="score">
-                      <%=Quests[i].answers.length%>
-                    </div>
-                    <div class="word">
-                      <% if(Quests[i].answers.length == 1) {%>
-                        ответ
-                      <% }else if(Quests[i].answers.length == 2 || Quests[i].answers.length == 3 || Quests[i].answers.length == 4){%>
-                        ответa
-                      <%}else{%>
-                        ответов
-                      <%}%>
-                    </div>
-                  </div>
-                  <div  class="question-info">
-                    <div class="title">
-                      <h4><%=Quests[i].title%></h4>
-                    </div>
-                    <div class="desription">
-                      <%=Quests[i].description%>
-                    </div>                         
-                  </div>
-                </div>
-              </a>
-              <div class="line"></div>
-            <%} %>
+            <%=user%>
           </div>
         </div>
       </div>
@@ -91,10 +60,10 @@
         <p>2020 Матвоп  |  Email: al.timofeev.m@yandex.ru</p>
       </footer>
     </div>
-    
-    
-    
-        
+   
+
+
+
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

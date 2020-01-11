@@ -12,182 +12,191 @@
     <title>Matvop</title>
   </head>
   <body>
-    <nav>
-      <div class="logo">
-          <a href="/">Матвоп<sub>α</sub></a>
-      </div>
-      <div class="navigation">
-          <ul class="navbar-">
-            <li>
+    <div class="wrapper">
+      <div class="cont">
+        <nav>
+          <div class="logo">
+            <a href="/">Матвоп<sub>α</sub></a>
+          </div>
+          <div class="navigation">
+            <ul class="navbar-">
+              <li>
                 <a href="/">Главная</a>
-            </li>
-            <li class="search">
+              </li>
+              <li class="search">
                 <form action="/findQuestion" method="POST">
                   <input type="text" name="text" placeholder="Искать здесь...">
                   <button type="submit"></button>
                 </form>
-            </li>
-            <li>
+              </li>
+              <li>
                 <a href="#" onclick="document.getElementById('modal2').style.display='block'">Зарегистрироваться</a>
-            </li>
-            <li>
+              </li>
+              <li>
                 <a href="#" onclick="document.getElementById('modal1').style.display='block'">Войти</a>
-            </li>
-          </ul>
-      </div>
-    </nav>  
-
-    <div id="modal1" class="modal">
-      <div class="modal-content animate">
-        <form action="/login" method="POST">
-          <div class="imgcontainer">
-            <span onclick="document.getElementById('modal1').style.display='none'" class="close" title="Close Modal">×</span>
-          </div>    
-          <div class="container">
-            <label for="uname"><b>Логин</b></label>
-            <input type="text" placeholder="Enter Username" name="login" required>
-      
-            <label for="psw"><b>Пароль</b></label>
-            <input type="password" placeholder="Enter Password" name="password" required>
-              
-            <button type="submit">Войти</button>
+              </li>
+            </ul>
           </div>
-          </form>
-          <div class="or">
-            <span>или</span>
+        </nav>  
+        <div id="modal1" class="modal">
+          <div class="modal-content animate">
+            <form action="/login" method="POST">
+              <div class="imgcontainer">
+                <span onclick="document.getElementById('modal1').style.display='none'" class="close" title="Close Modal">×</span>
+              </div>    
+              <div class="container">
+                <label for="uname"><b>Логин</b></label>
+                <input type="text" placeholder="Enter Username" name="login" required>  
+                <label for="psw"><b>Пароль</b></label>
+                <input type="password" placeholder="Enter Password" name="password" required>          
+                <button type="submit">Войти</button>
+              </div>
+            </form>
+            <div class="or">
+              <span>или</span>
+            </div>
+            <div class="auth">
+              <a href="/auth/yandex" class="yandex-auth"></a>
+              <a href="/auth/vkontakte" class="vk-auth"></a>
+              <a href="/auth/odnoklassniki" class="odnoklassniki-auth"></a>
+              <a href="/auth/google" class="google-auth"></a>
+            </div>
           </div>
-          <div class="auth">
-            <a href="/auth/yandex" class="yandex-auth"></a>
-            <a href="/auth/vkontakte" class="vk-auth"></a>
-            <a href="/auth/odnoklassniki" class="odnoklassniki-auth"></a>
-            <a href="/auth/google" class="google-auth"></a>
+        </div>
+        <div id="modal2" class="modal" >
+          <div class="modal-content animate">
+            <form  action="/register" method="POST">
+              <div class="imgcontainer">
+                <span onclick="document.getElementById('modal2').style.display='none'" class="close" title="Close Modal">×</span>
+              </div>  
+              <div class="container">
+                <label for="uname"><b>Логин</b></label>
+                <input type="text" placeholder="Enter Username" name="login" required>  
+                <label for="psw"><b>Пароль</b></label>
+                <input type="password" placeholder="Enter Password" name="password" required>          
+                <button type="submit">Зарегистрироваться</button>
+              </div>
+            </form>
+            <div class="or">
+              <span>или</span>
+            </div>
+            <div class="auth">
+              <a href="/auth/yandex" class="yandex-auth"></a>
+              <a href="/auth/vkontakte" class="vk-auth"></a>
+              <a href="/auth/odnoklassniki" class="odnoklassniki-auth"></a>
+              <a href="/auth/google" class="google-auth"></a>
+            </div>
           </div>
-      </div>
-    </div>
-    
-    <div id="modal2" class="modal" >
-      <div class="modal-content animate">
-        <form  action="/register" method="POST">
-          <div class="imgcontainer">
-            <span onclick="document.getElementById('modal2').style.display='none'" class="close" title="Close Modal">×</span>
-          </div>
-      
-          <div class="container">
-            <label for="uname"><b>Логин</b></label>
-            <input type="text" placeholder="Enter Username" name="login" required>
-      
-            <label for="psw"><b>Пароль</b></label>
-            <input type="password" placeholder="Enter Password" name="password" required>
-              
-            <button type="submit">Зарегистрироваться</button>
-          </div>
-        </form>
-        <div class="or">
-            <span>или</span>
-          </div>
-          <div class="auth">
-            <a href="/auth/yandex" class="yandex-auth"></a>
-            <a href="/auth/vkontakte" class="vk-auth"></a>
-            <a href="/auth/odnoklassniki" class="odnoklassniki-auth"></a>
-            <a href="/auth/google" class="google-auth"></a>
-          </div>
-      </div>
-      </div>
-    </div>
-    <div class="container">
-        
-        <div class="question-a" id = "question">
-            <div class="title"><%= data.Question.title %></div>
-            <div class="description"><%= data.Question.description %></div>
+        </div>
+        <div class="container"> 
+          <div class="question-a" id = "question">
+            <div class="title">
+              <%= data.Question.title %>
+            </div>
+            <div class="description">
+              <%= data.Question.description %>
+            </div>
         </div>
         <div class="line"></div>
         <div  class="answers-a" id = "answers">
-            <% for(var i=0; i<data.Ans.length;i++) {%>
-              <div class="answer-info">
-                <div class="score">
-                  <button type="submit" class="upscore" title="Войдите чтобы головать" onclick="document.getElementById('modal1').style.display='block'"></button>
-                  <div class="scoreNum"><%= data.Ans[i].score %></div>
-                  <button type="submit" class="downscore" title="Войдите чтобы головать" onclick="document.getElementById('modal1').style.display='block'"></button>
+          <% for(var i=0; i<data.Ans.length;i++) {%>
+            <div class="answer-info">
+              <div class="score">
+                <button type="submit" class="upscore" title="Войдите чтобы головать" onclick="document.getElementById('modal1').style.display='block'"></button>
+                <div class="scoreNum">
+                  <%= data.Ans[i].score %>
                 </div>
-                <div class="text">
-                  <% let k = 0                                         %>
-                    <% let t = -1                                        %>
-                    <% let b = 0                                         %>
-                    <% let it = 0                                        %>
-                    <% let string = ''                                   %>
-                    <% for(let j=0; j < data.Ans[i].answer.length; ++j){ %>
-                    <%    if(k==0){                                      %>
-                    <%      if(data.Ans[i].answer[j] === '<'){           %>
-                    <%        ++k                                        %>
-                    <%      }else{                                       %>
-                    <%        string += data.Ans[i].answer[j]            %>
-                    <%      }                                            %>
-                    <%    }else{                                         %>
-                    <%      if(k==1){                                    %>
-                    <%        if(data.Ans[i].answer[j] === 'Ж'){         %>
-                    <%          ++k                                      %>
-                    <%          t = 0                                    %>
-                    <%        }else{                                     %>
-                    <%          if(data.Ans[i].answer[j] === 'Н'){       %>
-                    <%            ++k                                    %>
-                    <%            t = 1                                  %>
-                    <%          }else{                                   %>
-                    <%            string +='<'                           %>
-                    <%            k=0                                    %> 
-                    <%          }                                        %>
-                    <%        }                                          %>
-                    <%    }else{                                         %>
-                    <%      if(k==2){                                    %>
-                    <%        if(data.Ans[i].answer[j] === '>'){         %>
-                    <%          if(t==0){                                %>
-                                  <%= string %>
-                    <%            if(b%2==0){                            %>
-                                    <b>
-                    <%            }else{                                 %>
-                                    </b>
-                    <%            }                                      %>
-                    <%            string=''                              %>
-                    <%            k=0                                    %>
-                    <%            ++b                                    %> 
-                    <%          }                                        %>
-                    <%          if(t==1){                                %>
-                                  <%= string %>
-                    <%            if(it%2==0){                           %>
-                                    <em>
-                    <%            }else{                                 %>
-                                    </em>
-                    <%            }                                      %>
-                    <%            string=''                              %>
-                    <%            k=0                                    %>
-                    <%            ++it                                   %> 
-                    <%          }                                        %>
-                    <%        }else{                                     %>
-                    <%          if(t==0){                                %>
-                    <%            string += 'Ж'                          %>
-                    <%            k=0                                    %>              
-                    <%          }                                        %>
-                    <%          if(t==1){                                %>
-                    <%             string +='Н'                          %>
-                    <%            k=0                                    %> 
-                    <%          }                                        %>
-                    <%        }                                          %>
-                    <%      }                                            %>
-                    <%    }                                              %>
-                    <%  }                                                %>
-                    <% }                                                 %>
-                        <%= string %>
-                    <% if(b%2==1){                                       %>
-                        </b>
-                    <% }                                                 %>
-                    <% if(it%2==1){                                      %>
-                        </em>
-                    <% }                                                 %> 
-                </div>    
+                <button type="submit" class="downscore" title="Войдите чтобы головать" onclick="document.getElementById('modal1').style.display='block'"></button>
               </div>
-              <div class="line"></div>
-            <%} %>
+              <div class="text">
+                <% let k = 0                                         %>
+                <% let t = -1                                        %>
+                <% let b = 0                                         %>
+                <% let it = 0                                        %>
+                <% let string = ''                                   %>
+                <% for(let j=0; j < data.Ans[i].answer.length; ++j){ %>
+                <%    if(k==0){                                      %>
+                <%      if(data.Ans[i].answer[j] === '<'){           %>
+                <%        ++k                                        %>
+                <%      }else{                                       %>
+                <%        string += data.Ans[i].answer[j]            %>
+                <%      }                                            %>
+                <%    }else{                                         %>
+                <%      if(k==1){                                    %>
+                <%        if(data.Ans[i].answer[j] === 'Ж'){         %>
+                <%          ++k                                      %>
+                <%          t = 0                                    %>
+                <%        }else{                                     %>
+                <%          if(data.Ans[i].answer[j] === 'Н'){       %>
+                <%            ++k                                    %>
+                <%            t = 1                                  %>
+                <%          }else{                                   %>
+                <%            string +='<'                           %>
+                <%            k=0                                    %> 
+                <%          }                                        %>
+                <%        }                                          %>
+                <%    }else{                                         %>
+                <%      if(k==2){                                    %>
+                <%        if(data.Ans[i].answer[j] === '>'){         %>
+                <%          if(t==0){                                %>
+                <%= string %>
+                <%            if(b%2==0){                            %>
+                                <b>
+                <%            }else{                                 %>
+                                </b>
+                <%            }                                      %>
+                <%            string=''                              %>
+                <%            k=0                                    %>
+                <%            ++b                                    %> 
+                <%          }                                        %>
+                <%          if(t==1){                                %>
+                            <%= string %>
+                <%            if(it%2==0){                           %>
+                                <em>
+                <%            }else{                                 %>
+                                </em>
+                <%            }                                      %>
+                <%            string=''                              %>
+                <%            k=0                                    %>
+                <%            ++it                                   %> 
+                <%          }                                        %>
+                <%        }else{                                     %>
+                <%          if(t==0){                                %>
+                <%            string += 'Ж'                          %>
+                <%            k=0                                    %>              
+                <%          }                                        %>
+                <%          if(t==1){                                %>
+                <%             string +='Н'                          %>
+                <%            k=0                                    %> 
+                <%          }                                        %>
+                <%        }                                          %>
+                <%      }                                            %>
+                <%    }                                              %>
+                <%  }                                                %>
+                <% }                                                 %>
+                                <%= string %>
+                <% if(b%2==1){                                       %>
+                    </b>
+                <% }                                                 %>
+                <% if(it%2==1){                                      %>
+                    </em>
+                <% }                                                 %> 
+              </div>    
+            </div>
+            <div class="line"></div>
+              <%} %>
+            </div>
         </div>
       </div>
+      <footer>
+        <p>2020 Матвоп  |  Email: al.timofeev.m@yandex.ru</p>
+      </footer>
+    </div>
+    
+
+
+
+
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

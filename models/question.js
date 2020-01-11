@@ -2,9 +2,10 @@ const mongoose = require('mongoose');
 const connection = require('../config/db');
 
 const questionSchema = mongoose.Schema({
-    userEmail: String,
+    userId: String,
     title: String,
     description: String,
+    creationDate: Date,
     tags: [String],
     answers: [String],
     userAnswered: [String]

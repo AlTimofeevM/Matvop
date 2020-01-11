@@ -10,6 +10,10 @@ exports.findUserByToken = function (token) {
   return UserModel.findOne({token: token})
 }
 
+exports.findUserByUsername = function (username) {
+  return UserModel.findOne({username: username})
+}
+
 exports.findUserByEmail = function (email) {
   return UserModel.findOne({email: email})
 }

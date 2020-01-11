@@ -8,54 +8,74 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="style/style.css"/>
     <link rel="stylesheet" type="text/css" href="style/question.css"/>
+    <link rel="stylesheet" type="text/css" href="style/profile.css"/>
     <title>Matvop</title>
   </head>
   <body>
-    <nav>
-      <div class="logo">
-          <a href="/">Матвоп<sub>α</sub></a>
-      </div>
-      <div class="navigation">
-          <ul class="navbar-">
-            <li>
+    <div class="wrapper">
+      <div class="cont">
+        <nav>
+          <div class="logo">
+            <a href="/">Матвоп<sub>α</sub></a>
+          </div>
+          <div class="navigation">
+            <ul class="navbar-">
+              <li>
                 <a href="/">Главная</a>
-            </li>
-            <li class="search">
+              </li>
+              <li class="search">
                 <form action="\" method="get">
                   <input type="text" placeholder="Искать здесь...">
                   <button type="submit"></button>
                 </form>
-            </li>
-            <li>
-              <a href="/ask">Задать вопроc</a>
-            </li>
-            <li>
+              </li>
+              <li>
+                <a href="/ask">Задать вопроc</a>
+              </li>
+              <li>
+                <a href="#" class="user-profile" onclick="document.getElementById('profile').style.display='block'"></a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+        <div id="profile" class="modal">
+          <div class="modal-content animate">
+            <ul class="submenu">
+              <li>
+                <a href="/profile">Профиль</a>
+              </li>
+              <li>
                 <a href="/logout">Выйти</a>
-            </li>
-          </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="question">
+          <h3>Новый вопрос</h3>
+          <form method="post" action="/ask" >
+            <div class="form-group">
+              <label for="exampleInputTitle1"><h5><strong>Заголовок</strong></h5></label>
+              <input type="text" class="form-control" name="title" placeholder="Кратко сформулируйт свой вопрос" required>
+            </div>
+            <br/>
+            <div class="form-group">
+              <h5><strong>Основная часть</strong></h5>
+              <textarea rows="10" class="form-control" name="description" required>
+              </textarea>
+            </div>
+            <!-- <div class="form-group">
+              <label for="exampleInputTags"><h5><strong>Теги вопроса</strong></h5></label>
+              <input type="text" class="form-control" name="tags" placeholder="Области к котрым относиться ваш вопрос" required>
+            </div> -->
+            <button type="submit" class="btn btn-dark">Отправить</button>
+          </form>
+        </div>
       </div>
-    </nav>
-    <div class="question">
-      <h3>Новый вопрос</h3>
-    <form method="post" action="/ask" >
-      <div class="form-group">
-        <label for="exampleInputTitle1"><h5><strong>Заголовок</strong></h5></label>
-        <input type="text" class="form-control" name="title" placeholder="Кратко сформулируйт свой вопрос" required>
-      </div>
-      <br/>
-      <div class="form-group">
-        <h5><strong>Основная часть</strong></h5>
-        <textarea rows="10" class="form-control" name="description" required>
-
-        </textarea>
-      </div>
-      <!-- <div class="form-group">
-            <label for="exampleInputTags"><h5><strong>Теги вопроса</strong></h5></label>
-            <input type="text" class="form-control" name="tags" placeholder="Области к котрым относиться ваш вопрос" required>
-      </div> -->
-      <button type="submit" class="btn btn-dark">Отправить</button>
-    </form>
-  </div>
+      <footer>
+        <p>2020 Матвоп  |  Email: al.timofeev.m@yandex.ru</p>
+      </footer>
+    </div>
+  
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

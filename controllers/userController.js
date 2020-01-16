@@ -54,7 +54,7 @@ module.exports.ask = async function (req,res){
     day: 'numeric'
   }
   let date = new Date().toLocaleString('ru', options)
-  let questionData = {userId: req.user._id, title: req.body.title, description: req.body.description,creationDate:date}
+  let questionData = {userId: req.user._id, title: req.body.title, description: req.body.description,creationDate:date, tags:req.body.tags.split(',')}
   let question = await db.addQuestion(questionData)
   await db.addQuestionToUser(req.user._id, question._id)
   res.redirect('/home')

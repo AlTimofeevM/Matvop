@@ -78,7 +78,14 @@
                     </div>
                     <div class="desription">
                       <%=Quests[i].description%>
-                    </div>                         
+                    </div>
+                    <p>
+                      <% for(let j=0; j < Quests[i].tags.length; ++j) {%>
+                        <div class="tag">
+                        <%= Quests[i].tags[j] %>
+                        </div>
+                      <%}%>
+                    </p>                             
                   </div>
                 </div>
               </a>

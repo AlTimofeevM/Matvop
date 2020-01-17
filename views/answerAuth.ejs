@@ -56,6 +56,13 @@
             <div class="description">
               <%= data.Question.description %>
             </div>
+            <p>
+              <% for(let i=0; i < data.Question.tags.length; ++i) {%>
+                <div class="tag">
+                <%= data.Question.tags[i] %>
+                </div>
+              <%}%>
+            </p>
           </div>
           <div class="line"></div>
           <div  class="answers-a" id = "answers">

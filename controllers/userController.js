@@ -85,6 +85,7 @@ module.exports.allAnswers = async function(req, res) {
       let ans = await db.findAnswerById(id)
       Ans.push({answer : ans.answer, score: ans.score, id: ans._id})
   }
+  console.log(question)
   return {Question : question, Ans : Ans}
 }
 

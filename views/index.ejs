@@ -2,7 +2,6 @@
 <html lang="ru">
   <head>
     <meta charset="utf-8">
-    <meta name="yandex-verification" content="2f231e7462251ada" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="shortcut icon" href="img/favicon.png" type="image/png">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -114,7 +113,14 @@
                 </div>
                 <div class="desription">
                   <%=Quests[i].description%>
-                </div>                          
+                </div>
+                <p>
+                  <% for(let j=0; j < Quests[i].tags.length; ++j) {%>
+                    <div class="tag">
+                    <%= Quests[i].tags[j] %>
+                    </div>
+                  <%}%>
+                </p>                          
               </div>
             </div>
           </a>

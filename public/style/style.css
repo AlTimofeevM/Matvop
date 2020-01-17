@@ -145,3 +145,12 @@ nav .navigation li:nth-last-child(2){
   text-decoration: none;
   color: #1a1c1f;
 }
+
+.tag {
+    display:inline-block;
+    background-color: #517299;
+    color: whitesmoke;
+    padding: 0.1em 0.5em;
+    margin: 0.2em;
+    border-radius: 10px;
+}

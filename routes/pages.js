@@ -10,11 +10,8 @@ router.get('/', (req,res)=> {
 })
 
 router.get('/home', async function(req, res){
-    if(req.isAuthenticated()){
-        res.render('indexAuth', {Quests : await userController.showQuestions(), user : req.user.token})
-    }else{
-        res.render('index', {Quests : await userController.showQuestions()})
-    }
+  let user =  typeof req.user == "undefined" ? "qqq" : req.user.token
+  res.render('index', {user :user ? "unknown" : req.user.token, Quests : await userController.showQuestions(), isAuth : req.isAuthenticated()})
 })
 
 router.get('/user/*', async (req,res)=>{
@@ -22,46 +19,30 @@ router.get('/user/*', async (req,res)=>{
   if(!user){
     res.render("404")
   }else{
-    if(req.isAuthenticated){
-      if(user.token === req.user.token){
-        res.render("userPage",{user : req.user.token})
-      }else{
-        res.render("profile",{username: user.token, email: user.email})
-      }
-    }else{
-      res.render("profile",{user:user})
-    }
+    res.render("profile",{isAuth : req.isAuthenticated(), User : await userController.userProfile(req,res)})
   }
 })
 
 router.get('/question=*',async function(req, res){
   let text = decodeURI(req.url.slice(10))
-  if(req.isAuthenticated()){
-      res.render('searchQuestionAuth', {Quests : await userController.searchQuestion(text)})
-  }else{
-      res.render('searchQuestion', {Quests : await userController.searchQuestion(text)})
-  }
+  res.render('searchQuestion', {Quests : await userController.searchQuestion(text),  isAuth : req.isAuthenticated()})
 })
 
 router.get('/ask', (req,res) => {
   if(req.isAuthenticated()){
-    res.render('question')
+    res.render('question', {isAuth : req.isAuthenticated()})
   }else{
-    res.redirect("404error404")
+    res.render('404')
   }
 })
 
 router.get('/question/*', async (req,res)=>{
-  if(req.isAuthenticated()){
-    res.render('answerAuth', {data : await userController.allAuthAnswers(req, res),user : req.user.token})
-  }else{
-    res.render('answer', {data : await userController.allAnswers(req, res)})
-  }  
+    res.render('answer', {data : await userController.allAnswers(req, res), isAuth : req.isAuthenticated()})
 })
 
 router.get('/logout', (req, res) => {
     req.logOut();
-    res.redirect('/home');
+    res.redirect('back');
 });
 
 

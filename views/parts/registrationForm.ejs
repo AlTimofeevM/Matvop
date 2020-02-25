@@ -1,0 +1,27 @@
+<div id="modal2" class="modal" >
+  <div class="modal-content animate">
+    <form  action="/register" method="POST">
+      <div class="imgcontainer">
+        <span onclick="document.getElementById('modal2').style.display='none'" class="close" title="Close Modal">×</span>
+      </div>
+      <div class="container">
+        <label for="email"><b>Электронная почта</b></label>
+        <input type="email" placeholder="Enter Email" name="email" required>
+        <label for="username"><b>Никнейм</b></label>
+        <input type="text" placeholder="Enter Username" name="username" required>
+        <label for="psw"><b>Пароль</b></label>
+        <input type="password" placeholder="Enter Password" name="password" required>     
+        <button type="submit">Зарегистрироваться</button>
+      </div>
+    </form>
+    <div class="or">
+      <span>или</span>
+    </div>
+    <div class="auth">
+      <a href="/auth/yandex" class="yandex-auth"></a>
+      <a href="/auth/vkontakte" class="vk-auth"></a>
+      <a href="/auth/odnoklassniki" class="odnoklassniki-auth"></a>
+      <a href="/auth/google" class="google-auth"></a>
+    </div>
+  </div>
+</div>

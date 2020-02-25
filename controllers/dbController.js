@@ -18,53 +18,6 @@ exports.findUserByEmail = function (email) {
   return UserModel.findOne({email: email})
 }
 
-exports.userLogin =  function(email, password, done) {
-    UserModel.findOne({ email : email }, function(err, user) {
-      if (err) { return done(err); }
-      if (!user) {
-        return done(null, false, { message: 'Incorrect login.' });
-      }
-      if (user.password != password) {
-        return done(null, false, { message: 'Incorrect password.' });
-      }
-      return done(null, user);
-    });
-  }
-
-exports.vkAuth = function(accessToken, refreshToken, params, profile, done) {
-  console.log(profile)
-  UserModel.findOne({ token: profile.id }, function(err, user) {
-    if (err) { return done(err); }
-    if (!user) {
-      let options = {
-        year: 'numeric',
-        month: 'numeric',
-        day: 'numeric'
-      }
-      let date = new Date().toLocaleString('ru', options)
-      let user = UserModel.create({token: profile.id, registrationDate: date})
-    }
-    return done(null, user);
-  })
-}
-
-exports.odnoklassnikiAuth = function(accessToken, refreshToken, profile, done) {
-  console.log(profile)
-  UserModel.findOne({ token: profile.id }, function(err, user) {
-    if (err) { return done(err); }
-    if (!user) {
-      let options = {
-        year: 'numeric',
-        month: 'numeric',
-        day: 'numeric'
-      }
-      let date = new Date().toLocaleString('ru', options)
-      let user = UserModel.create({token: profile.id, registrationDate: date})
-    }
-    return done(null, user);
-  })
-}
-
 exports.addUser = function (userData) {
   return UserModel.create(userData)
 }
@@ -132,6 +85,56 @@ exports.userIsScored = async function(userId, answerId){
   return true
 }
 
+exports.userLogin =  function(email, password, done) {
+  UserModel.findOne({ email : email }, function(err, user) {
+    if (err) { return done(err); }
+    if (!user) {
+      return done(null, false, { message: 'Incorrect login.' });
+    }
+    if (user.password != password) {
+      return done(null, false, { message: 'Incorrect password.' });
+    }
+    return done(null, user);
+  });
+}
+
+exports.vkAuth = function(accessToken, refreshToken, params, profile, done) {
+console.log(profile)
+UserModel.findOne({ token: profile.id }, function(err, user) {
+  if (err) { return done(err); }
+  if (!user) {
+    let options = {
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric'
+    }
+    let date = new Date().toLocaleString('ru', options)
+    let user = UserModel.create({token: profile.id, registrationDate: date})
+  }
+  return done(null, user);
+})
+}
+
+exports.odnoklassnikiAuth = function(accessToken, refreshToken, profile, done) {
+console.log(profile)
+UserModel.findOne({ token: profile.id }, function(err, user) {
+  if (err) { return done(err); }
+  if (!user) {
+    let options = {
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric'
+    }
+    let date = new Date().toLocaleString('ru', options)
+    let user = UserModel.create({token: profile.id, registrationDate: date})
+  }
+  return done(null, user);
+})
+}
+
 exports.findQuestions = function(text){
-  return QuestionModel.find({ description : { $regex: text, $options: 'i' } })
+  return QuestionModel.find({ $text: { $search: text } }, function(err, result) {
+    if(err) console.log(err)
+    console.log(result)
+  })
 }

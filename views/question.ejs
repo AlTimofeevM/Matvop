@@ -29,42 +29,7 @@
   <body>
     <div class="wrapper">
       <div class="cont">
-        <nav>
-          <div class="logo">
-            <a href="/">Матвоп<sub>α</sub></a>
-          </div>
-          <div class="navigation">
-            <ul class="navbar-">
-              <li>
-                <a href="/">Главная</a>
-              </li>
-              <li class="search">
-                <form action="\" method="get">
-                  <input type="text" placeholder="Искать здесь...">
-                  <button type="submit"></button>
-                </form>
-              </li>
-              <li>
-                <a href="/ask">Задать вопроc</a>
-              </li>
-              <li>
-                <a href="#" class="user-profile" onclick="document.getElementById('profile').style.display='block'"></a>
-              </li>
-            </ul>
-          </div>
-        </nav>
-        <div id="profile" class="modal">
-          <div class="modal-content animate">
-            <ul class="submenu">
-              <li>
-                <a href="/profile">Профиль</a>
-              </li>
-              <li>
-                <a href="/logout">Выйти</a>
-              </li>
-            </ul>
-          </div>
-        </div>
+        <%- include("parts/header.ejs" ,{isAuth : isAuth}) %>
         <div class="question">
           <h3>Новый вопрос</h3>
           <form method="post" action="/ask" >
@@ -88,9 +53,7 @@
           <br/>
         </div>
       </div>
-      <footer>
-        <p>2020 Матвоп  |  Email: al.timofeev.m@yandex.ru</p>
-      </footer>
+      <%- include("parts/footer.ejs") %>
     </div>
 
   

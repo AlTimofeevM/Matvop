@@ -1,0 +1,40 @@
+<nav>
+  <div class="logo">
+    <a href="/">Матвоп<sub>α</sub></a>
+  </div>
+  <div class="navigation">
+    <ul class="navbar-">
+      <li>
+        <a href="/">Главная</a>
+      </li>
+      <li class="search">
+        <form action="/findQuestion" method="POST">
+          <input type="text" name="text" placeholder="Искать здесь...">
+          <button type="submit"></button>
+        </form>
+      </li>
+      <% if(!isAuth){ %>
+        <li>
+          <a href="#" onclick="document.getElementById('modal2').style.display='block'">Зарегистрироваться</a>
+        </li>
+        <li>
+          <a href="#" onclick="document.getElementById('modal1').style.display='block'">Войти</a>
+        </li>
+      <% }else{ %>
+        <li>
+          <a href="/ask">Задать вопроc</a>
+        </li>
+        <li>
+          <a href="#" class="user-profile" onclick="document.getElementById('profile').style.display='block'"></a>
+        </li>
+      <% } %>
+    </ul>
+  </div>
+</nav>
+
+<% if(!isAuth){%>
+  <%- include("loginForm.ejs") %>  
+  <%- include("registrationForm.ejs") %>
+<%}else{%>
+  <%- include("submenu.ejs") %>
+<%}%>

@@ -15,7 +15,7 @@ module.exports.login = function(req,res,next){
           if (err) {
             return next(err)
           }
-          return res.redirect('/home')
+          return res.redirect('back')
         })
     })(req,res, next)
 }
@@ -25,13 +25,9 @@ module.exports.register = async function (req, res){
         console.log(req.body)
         let user = await db.findUserByEmail(req.body.email)
         if (!user) {
-          let options = {
-            year: 'numeric',
-            month: 'numeric',
-            day: 'numeric'
-          }
-          let date = new Date().toLocaleString('ru', options)
+          let date = new Date()
           let user = await db.addUser({token: req.body.username, name : req.body.username, email: req.body.email, password: req.body.password, registrationDate: date})
+          console.log(user)
           req.logIn(user, function(err) {
             if (err) {
               return next(err)
@@ -48,19 +44,14 @@ module.exports.register = async function (req, res){
 }
 
 module.exports.ask = async function (req,res){
-  let options = {
-    year: 'numeric',
-    month: 'numeric',
-    day: 'numeric'
-  }
-  let date = new Date().toLocaleString('ru', options)
+  let date = new Date()
   let questionData = {userId: req.user._id, title: req.body.title, description: req.body.description,creationDate:date, tags:req.body.tags.split(',')}
   let question = await db.addQuestion(questionData)
   await db.addQuestionToUser(req.user._id, question._id)
   res.redirect('/home')
 }
 
-module.exports.showQuestions = async function (){
+module.exports.showQuestions = async function (req,res){
   let Quests = await db.allQuestions()
   return Quests
 } 
@@ -77,6 +68,18 @@ module.exports.allAuthAnswers = async function(req, res) {
   return {Question : question, Ans : Ans}
 }
 
+module.exports.userProfile = async function(req,res) {
+  let token = req.url.slice(6)
+  let User = await db.findUserByToken(token)
+  let Profile = {username : User.token, email: User.email}
+  let Questions = []
+  for(let id of User.questions){
+    let question = await db.findQuestionById(id)
+    Questions.push(question)
+  }
+  return {Profile :Profile, Questions:  Questions};
+}
+
 module.exports.allAnswers = async function(req, res) {
   let id = req.url.slice(10,34)
   let question = await db.findQuestionById(id)
@@ -90,12 +93,7 @@ module.exports.allAnswers = async function(req, res) {
 }
 
 module.exports.answer = async function (req,res){
-  let options = {
-    year: 'numeric',
-    month: 'numeric',
-    day: 'numeric'
-  }
-  let date = new Date().toLocaleString('ru', options)
+  let date = new Date()
   let id = req.url.slice(8)
   let answerData = {answer : req.body.description , question: id, score: 0,creationDate:date}
   console.log(answerData)

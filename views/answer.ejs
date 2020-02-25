@@ -9,6 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../style/style.css"/>
     <link rel="stylesheet" type="text/css" href="../style/answer.css"/>
     <link rel="stylesheet" type="text/css" href="../style/login.css"/>
+    <link rel="stylesheet" type="text/css" href="../style/profile.css"/>
+    <link rel="stylesheet" type="text/css" href="../style/editor.css"/>
     <!-- Yandex.Metrika counter -->
       <script type="text/javascript" >
         (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -28,80 +30,7 @@
   <body>
     <div class="wrapper">
       <div class="cont">
-        <nav>
-          <div class="logo">
-            <a href="/">Матвоп<sub>α</sub></a>
-          </div>
-          <div class="navigation">
-            <ul class="navbar-">
-              <li>
-                <a href="/">Главная</a>
-              </li>
-              <li class="search">
-                <form action="/findQuestion" method="POST">
-                  <input type="text" name="text" placeholder="Искать здесь...">
-                  <button type="submit"></button>
-                </form>
-              </li>
-              <li>
-                <a href="#" onclick="document.getElementById('modal2').style.display='block'">Зарегистрироваться</a>
-              </li>
-              <li>
-                <a href="#" onclick="document.getElementById('modal1').style.display='block'">Войти</a>
-              </li>
-            </ul>
-          </div>
-        </nav>  
-        <div id="modal1" class="modal">
-          <div class="modal-content animate">
-            <form action="/login" method="POST">
-              <div class="imgcontainer">
-                <span onclick="document.getElementById('modal1').style.display='none'" class="close" title="Close Modal">×</span>
-              </div>    
-              <div class="container">
-                <label for="uname"><b>Логин</b></label>
-                <input type="text" placeholder="Enter Username" name="login" required>  
-                <label for="psw"><b>Пароль</b></label>
-                <input type="password" placeholder="Enter Password" name="password" required>          
-                <button type="submit">Войти</button>
-              </div>
-            </form>
-            <div class="or">
-              <span>или</span>
-            </div>
-            <div class="auth">
-              <a href="/auth/yandex" class="yandex-auth"></a>
-              <a href="/auth/vkontakte" class="vk-auth"></a>
-              <a href="/auth/odnoklassniki" class="odnoklassniki-auth"></a>
-              <a href="/auth/google" class="google-auth"></a>
-            </div>
-          </div>
-        </div>
-        <div id="modal2" class="modal" >
-          <div class="modal-content animate">
-            <form  action="/register" method="POST">
-              <div class="imgcontainer">
-                <span onclick="document.getElementById('modal2').style.display='none'" class="close" title="Close Modal">×</span>
-              </div>  
-              <div class="container">
-                <label for="uname"><b>Логин</b></label>
-                <input type="text" placeholder="Enter Username" name="login" required>  
-                <label for="psw"><b>Пароль</b></label>
-                <input type="password" placeholder="Enter Password" name="password" required>          
-                <button type="submit">Зарегистрироваться</button>
-              </div>
-            </form>
-            <div class="or">
-              <span>или</span>
-            </div>
-            <div class="auth">
-              <a href="/auth/yandex" class="yandex-auth"></a>
-              <a href="/auth/vkontakte" class="vk-auth"></a>
-              <a href="/auth/odnoklassniki" class="odnoklassniki-auth"></a>
-              <a href="/auth/google" class="google-auth"></a>
-            </div>
-          </div>
-        </div>
+        <%- include("parts/header.ejs" ,{isAuth : isAuth}) %>
         <div class="container"> 
           <div class="question-a" id = "question">
             <div class="title">
@@ -122,6 +51,7 @@
         <div  class="answers-a" id = "answers">
           <% for(var i=0; i<data.Ans.length;i++) {%>
             <div class="answer-info">
+              <%if(!isAuth){%>
               <div class="score">
                 <button type="submit" class="upscore" title="Войдите чтобы головать" onclick="document.getElementById('modal1').style.display='block'"></button>
                 <div class="scoreNum">
@@ -129,6 +59,27 @@
                 </div>
                 <button type="submit" class="downscore" title="Войдите чтобы головать" onclick="document.getElementById('modal1').style.display='block'"></button>
               </div>
+              <%}else{%>
+                <div class="score">
+                  <% if(data.Ans[i].isScored){ %>
+                    <button type="submit" class="upscore" title="Вы уже голосовали"></button>
+                    <div class="scoreNum">
+                      <%= data.Ans[i].score %>
+                    </div>
+                    <button type="submit" class="downscore" title="Вы уже голосовали"></button>
+                  <%}else{%>
+                    <form method="post" action="/upscore=<%= data.Ans[i].id %>">
+                      <button type="submit" class="upscore" alt="fds"></button>
+                    </form>
+                    <div class="scoreNum">
+                      <%= data.Ans[i].score %>
+                    </div>
+                    <form method="post" action="/downscore=<%= data.Ans[i].id %>">
+                      <button type="submit" class="downscore"></button>
+                    </form>
+                  <%}%>
+                </div>
+              <%}%>
               <div class="text">
                 <% let k = 0                                         %>
                 <% let t = -1                                        %>
@@ -208,10 +159,33 @@
               <%} %>
             </div>
         </div>
+        <%if(isAuth){%>
+          <div class="answer" id = "answer">
+            <form method="post" action="/answer=<%= data.Question._id %>">
+              <h4><label for="exampleInputTitle1">Ваш ответ:</label></h4>
+              <div class="editor">
+                <div class="bar">
+                  <ul>
+                    <li>
+                      <button type="button" class="bold-btn"  onclick="document.getElementById('text').value+='<Ж><Ж>'" ></button>
+                    </li>
+                    <li>
+                      <button type="button" class="italic-btn" onclick="document.getElementById('text').value+='<Н><Н>'"></button>
+                    </li>
+                  </ul>
+                </div>
+                <div class="form-group">
+                  <textarea rows="10" class="form-control" name="description" id="text" required></textarea>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-dark">Ответить</button>
+              <br/>
+              <br/>        
+            </form>
+          </div>
+        <%}%>
       </div>
-      <footer>
-        <p>2020 Матвоп  |  Email: al.timofeev.m@yandex.ru</p>
-      </footer>
+      <%- include("parts/footer.ejs") %>
     </div>
     
 

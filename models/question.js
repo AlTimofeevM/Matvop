@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const connection = require('../config/db');
-var textSearch = require('mongoose-text-search');
 
 const questionSchema = mongoose.Schema({
     userId: String,
@@ -12,9 +11,7 @@ const questionSchema = mongoose.Schema({
     userAnswered: [String]
 })
 
-questionSchema.plugin(textSearch);
-
-questionSchema.index({ title: 'text' , tags: 'text', description: 'text'},{language : "russian"});
+questionSchema.index({ title: 'text' , tags: 'text', description: 'text'});
 
 const Question = connection.model('Question', questionSchema)
 

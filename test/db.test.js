@@ -11,7 +11,7 @@ describe('DB', function() {
     it("should find user by id", async () => {
         
         let expectedResult = "AlTimofeevM"
-        let result =  await db.findUserById("5e55785f222236202364b390");
+        let result =  await db.findUserById("5e90bf269430660017de751c");
         if(result.token!==expectedResult){
             throw new Error(`Expected ${expectedResult}, but got ${result}`)
         }
@@ -37,8 +37,8 @@ describe('DB', function() {
 
     it("should find question by id", async () => {
         
-        let expectedResult = "Найти все возможные события"
-        let result =  await db.findQuestionById("5e557905222236202364b391")
+        let expectedResult = "Какая сумма?"
+        let result =  await db.findQuestionById("5e90c02be56f6f00170f976a")
         if(result.title!==expectedResult){
             throw new Error(`Expected ${expectedResult}, but got ${result}`)
         }
@@ -46,8 +46,8 @@ describe('DB', function() {
 
     it("should find answer by id", async () => {
         
-        let expectedResult = "5e557905222236202364b391"
-        let result =  await db.findAnswerById("5e557b6d222236202364b392")
+        let expectedResult = "5e90c02be56f6f00170f976a"
+        let result =  await db.findAnswerById("5e90c03ce56f6f00170f976b")
         if(result.question!==expectedResult){
             throw new Error(`Expected ${expectedResult}, but got ${result}`)
         }

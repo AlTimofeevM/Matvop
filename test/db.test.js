@@ -3,11 +3,9 @@ const mongoose = require('mongoose')
 describe('DB', function() {
 
     after(function (done) {
-        mongoose.connection.db.dropDatabase(function () {
-            mongoose.connection.close(function () {
+            db.connection.close(function () {
                 done();
             });
-        });
     });
 
     it("should find user by id", async () => {

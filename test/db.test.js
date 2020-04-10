@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 describe('DB', function() {
 
     after(function (done) {
-            db.connection.close(function () {
+            mongoose.connection.close(function () {
                 done();
             });
     });

@@ -28,7 +28,7 @@
   <body>
     <div class="wrapper">
       <div class="cont">
-        <%- include("parts/header.ejs" ,{isAuth : isAuth}) %>
+        <%- include("parts/header.ejs" ,{isAuth : isAuth, user:user}) %>
         <%if(!isAuth){%>
         <div class="container">
           <% for(var i=0; i<Quests.length;i++) {%>

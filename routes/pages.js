@@ -10,8 +10,12 @@ router.get('/', (req,res)=> {
 })
 
 router.get('/home', async function(req, res){
-  let user =  typeof req.user == "undefined" ? "qqq" : req.user.token
-  res.render('index', {user :user ? "unknown" : req.user.token, Quests : await userController.showQuestions(), isAuth : req.isAuthenticated()})
+  if(req.isAuthenticated()){
+    user = req.user.token
+  }else{
+    user = "unknown"
+  }
+  res.render('index', {user :user, Quests : await userController.showQuestions(), isAuth : req.isAuthenticated()})
 })
 
 router.get('/user/*', async (req,res)=>{
@@ -19,25 +23,45 @@ router.get('/user/*', async (req,res)=>{
   if(!user){
     res.render("404")
   }else{
-    res.render("profile",{isAuth : req.isAuthenticated(), User : await userController.userProfile(req,res)})
+    if(req.isAuthenticated()){
+      user = req.user.token
+    }else{
+      user = "unknown"
+    }
+    res.render("profile",{user:user, isAuth : req.isAuthenticated(), User : await userController.userProfile(req,res)})
   }
 })
 
 router.get('/question=*',async function(req, res){
   let text = decodeURI(req.url.slice(10))
-  res.render('searchQuestion', {Quests : await userController.searchQuestion(text),  isAuth : req.isAuthenticated()})
+  if(req.isAuthenticated()){
+    user = req.user.token
+  }else{
+    user = "unknown"
+  }
+  res.render('searchQuestion', {user:user, Quests : await userController.searchQuestion(text),  isAuth : req.isAuthenticated()})
 })
 
 router.get('/ask', (req,res) => {
   if(req.isAuthenticated()){
-    res.render('question', {isAuth : req.isAuthenticated()})
+    if(req.isAuthenticated()){
+      user = req.user.token
+    }else{
+      user = "unknown"
+    }
+    res.render('question', {user:user, isAuth : req.isAuthenticated()})
   }else{
     res.render('404')
   }
 })
 
 router.get('/question/*', async (req,res)=>{
-    res.render('answer', {data : await userController.allAnswers(req, res), isAuth : req.isAuthenticated()})
+  if(req.isAuthenticated()){
+    user = req.user.token
+  }else{
+    user = "unknown"
+  }
+  res.render('answer', {user : user, data : await userController.allAnswers(req, res), isAuth : req.isAuthenticated()})
 })
 
 router.get('/logout', (req, res) => {
@@ -90,9 +114,20 @@ router.get('/auth/google/callback',
   function(req, res) {
     res.redirect('/');
   });
+  
+router.get('/info', async (req,res)=> {
+  if(req.isAuthenticated()){
+    user = req.user.token
+  }else{
+    user = "unknown"
+  }
+  res.render("info", {user : user, isAuth : req.isAuthenticated(), graph : (await userController.info()).Info })
+})
 
 router.get('/*', (req,res)=> {
   res.render("404")
 })
 
 module.exports = router
+
+

@@ -36,5 +36,5 @@
   <%- include("loginForm.ejs") %>  
   <%- include("registrationForm.ejs") %>
 <%}else{%>
-  <%- include("submenu.ejs") %>
+  <%- include("submenu.ejs", {user : user}) %>
 <%}%>

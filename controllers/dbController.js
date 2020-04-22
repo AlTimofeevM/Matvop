@@ -26,6 +26,10 @@ exports.allQuestions = function(){
   return QuestionModel.find({})
 }
 
+exports.allUsers = function(){
+  return UserModel.find({})
+}
+
 exports.addQuestion = function (questionData) {
   return QuestionModel.create(questionData)
 }
@@ -134,3 +138,4 @@ exports.findQuestions = function(text){
     console.log(result)
   })
 }
+

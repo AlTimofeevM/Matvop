@@ -133,3 +133,18 @@ module.exports.findUserByUsername = async function(username){
 module.exports.findUserByToken = async function(username){
   return await db.findUserByToken(username)
 }
+
+module.exports.info = async function(){
+  let arr = []
+  let users = await db.allUsers()
+  for(user1 of users){
+    for(q of user1.questions){
+      let question = await db.findQuestionById(q) 
+      for(user2 of question.userAnswered) {
+          arr.push([user1.token, (await db.findUserById(user2)).token])
+          console.log(arr)
+      }
+    }
+  }
+  return {Info : arr}
+}
